@@ -77,6 +77,8 @@ p{font-size:15.5px;color:var(--espresso);max-width:62ch;margin-bottom:18px;font-
 .nav-cta-link{font-family:var(--sans);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,248,241,.92);font-weight:400;border-bottom:1px solid var(--gold);padding-bottom:5px;transition:.25s ease;white-space:nowrap}
 .nav-cta-link:hover{color:var(--gold);letter-spacing:.3em}
 .series-tag{font-family:var(--sans);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-top:24px;font-weight:500}
+.series-name{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(23px,2.6vw,34px);color:var(--gold);line-height:1.05;margin:4px 0 16px;letter-spacing:.01em}
+.chero .series-name{color:var(--gold)}
 .journey.center .jstep{text-align:center;border-top:1px solid var(--line);padding-top:30px}
 .deep .journey.center .jstep,.dark .journey.center .jstep{border-color:var(--line-dk)}
 .journey.center .jstep .jn{margin:0 auto 18px}
