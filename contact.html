@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inquire | Begin Your Portrait Experience, Bellaire Ohio</title>
+<meta name="description" content="Begin your portrait experience with Blackwater Fine Art Portraits in Bellaire, Ohio. Inquire online or call or text (740) 206-9039 to plan artwork for the Ohio Valley.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .contact-in{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:start}
+  .contact-copy .studio-line{font-family:var(--sans);font-size:12px;letter-spacing:.06em;color:rgba(251,248,241,.82);line-height:2.1;margin-top:26px;font-weight:300}
+  .contact-copy .studio-line strong{color:var(--gold-soft);font-weight:500;letter-spacing:.14em;text-transform:uppercase;font-size:10px;display:block;margin-top:18px}
+  @media(max-width:880px){.contact-in{grid-template-columns:1fr;gap:44px}}
+</style>
+</head>
+<body>
+
+<nav class="topnav" id="topnav" data-solid-at="top">
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo" aria-label="Blackwater Fine Art Portraits home"><img src="logo.png" alt="Blackwater Fine Art Portraits"></a>
+    <div class="nav-links">
+      <div class="nav-drop"><span>Portraits</span><div class="menu"><a href="family.html">Families</a><a href="children.html">Children</a><a href="seniors.html">High School Seniors</a><a href="animals.html">Animals</a><a href="equine.html">Equine</a></div></div>
+      <a href="about.html">About</a><a href="experience.html">Experience</a><a href="investment.html">Investment</a><a href="stories.html">Stories</a>
+    </div>
+    <div class="nav-right"><span class="nav-phone">(740) 206-9039</span><a href="contact.html" class="btn btn-gold nav-cta">Inquire Now</a><button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button></div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mm-head"><img src="logo.png" alt="Blackwater"><button class="mm-close" id="mmClose" aria-label="Close menu">&times;</button></div>
+  <a href="index.html" class="mm-link">Home</a><a href="about.html" class="mm-link">About</a><a href="experience.html" class="mm-link">Experience</a>
+  <a href="family.html" class="sub mm-link">Family Portraits</a><a href="children.html" class="sub mm-link">Children's Portraits</a><a href="seniors.html" class="sub mm-link">High School Seniors</a><a href="animals.html" class="sub mm-link">Animal Portraits</a><a href="equine.html" class="sub mm-link">Equine Portraits</a>
+  <a href="investment.html" class="mm-link">Investment</a><a href="stories.html" class="mm-link">Stories Worth Framing</a><a href="faq.html" class="mm-link">FAQ</a><a href="contact.html" class="btn btn-gold mm-cta mm-link">Inquire Now</a>
+</div>
+
+<header class="chero">
+  <div class="wrap">
+    <span class="eyebrow">Begin Your Portrait Experience</span>
+    <h1>Let's create something <em>worth keeping</em></h1>
+    <p class="sub">The next step is simple. Tell us a little about your portrait, and we will guide you from here.</p>
+  </div>
+</header>
+
+<section class="deep reveal">
+  <div class="wrap">
+    <div class="contact-in">
+      <div class="contact-copy">
+        <span class="snum">Here to Help</span>
+        <h2>Start the <em>conversation</em></h2>
+        <p>Every Blackwater portrait begins with a relaxed conversation about who we are creating for and the walls you want to fill. Share a few details and we will reach out personally to plan your experience.</p>
+        <p class="muted" style="color:rgba(251,248,241,.7)">Prefer to talk? Call or text the studio directly. We would love to hear about your family, your senior, or your animal.</p>
+        <div class="studio-line">
+          <strong>Call or Text</strong>
+          <a href="tel:7402069039" style="color:var(--gold)">(740) 206-9039</a>
+          <strong>Email</strong>
+          <a href="mailto:info@blackwaterportraits.com" style="color:var(--gold)">info@blackwaterportraits.com</a>
+          <strong>Studio</strong>
+          56490 Key Bellaire Rd, Bellaire, Ohio 43906<br>By Appointment Only
+          <strong>Serving</strong>
+          Bellaire, St. Clairsville, Wheeling, Belmont County, Western Pennsylvania &amp; Northern West Virginia
+        </div>
+      </div>
+
+      <form class="form-card" onsubmit="return false" aria-label="Portrait inquiry form">
+        <div class="row2">
+          <div class="fg"><label for="fn">First Name</label><input id="fn" type="text" placeholder="First"></div>
+          <div class="fg"><label for="ln">Last Name</label><input id="ln" type="text" placeholder="Last"></div>
+        </div>
+        <div class="row2">
+          <div class="fg"><label for="em">Email</label><input id="em" type="email" placeholder="you@email.com"></div>
+          <div class="fg"><label for="ph">Phone</label><input id="ph" type="tel" placeholder="(740) 000-0000"></div>
+        </div>
+        <div class="fg"><label for="pt">Portrait Type</label>
+          <select id="pt">
+            <option>Family Portraits</option>
+            <option>Children's Portraits</option>
+            <option>High School Seniors</option>
+            <option>Animal Portraits</option>
+            <option>Equine Portraits</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="fg"><label for="who">Who Will Be Photographed</label><input id="who" type="text" placeholder="Names and ages, your dog, your horse..."></div>
+        <div class="fg"><label for="goal">Desired Artwork or Goals</label><input id="goal" type="text" placeholder="A wall piece for the living room, an album..."></div>
+        <div class="fg"><label for="tf">Preferred Timeframe</label>
+          <select id="tf">
+            <option>As soon as possible</option>
+            <option>Within the next month</option>
+            <option>In the next few months</option>
+            <option>Just exploring for now</option>
+          </select>
+        </div>
+        <div class="fg"><label for="msg">Message</label><textarea id="msg" rows="4" placeholder="Tell us a little about what you have in mind."></textarea></div>
+        <button type="submit" class="btn btn-gold">Send Inquiry</button>
+        <p class="form-note">We reply personally, usually within one business day.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-brand"><img src="logo.png" alt="Blackwater Fine Art Portraits"><p class="ft-tag">Fine art portrait artwork for the Ohio Valley, created to be treasured for generations.</p></div>
+    <div class="foot-cols">
+      <div class="fcol"><h4>Visit the Studio</h4><p>56490 Key Bellaire Rd<br>Bellaire, Ohio 43906<br>By Appointment Only</p></div>
+      <div class="fcol"><h4>Contact</h4><p><a href="tel:7402069039">(740) 206-9039</a><br><a href="mailto:info@blackwaterportraits.com">info@blackwaterportraits.com</a></p></div>
+      <div class="fcol links"><h4>Explore</h4><a href="about.html">About</a><a href="experience.html">Experience</a><a href="investment.html">Investment</a><a href="stories.html">Stories Worth Framing</a><a href="faq.html">FAQ</a><a href="contact.html">Inquire</a></div>
+      <div class="fcol links"><h4>Follow</h4><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a><a href="https://www.pinterest.com/" target="_blank" rel="noopener">Pinterest</a></div>
+    </div>
+    <div class="foot-bottom">&copy; 2026 Blackwater Fine Art Portraits <span class="sep">&middot;</span> Bellaire, Ohio<br>Serving Bellaire <span class="sep">&middot;</span> St. Clairsville <span class="sep">&middot;</span> Wheeling <span class="sep">&middot;</span> Belmont County <span class="sep">&middot;</span> Western Pennsylvania <span class="sep">&middot;</span> Northern West Virginia</div>
+  </div>
+</footer>
+<script src="site.js"></script>
+</body>
+</html>
