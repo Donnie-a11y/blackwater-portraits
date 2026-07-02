@@ -311,8 +311,9 @@ footer{background:var(--cream);color:var(--mushroom);padding:104px 0 42px;border
   .pillars,.g3,.quotes,.articles,.collections{grid-template-columns:1fr}
 }
 @media(max-width:880px){
-  .nav-links,.nav-phone,.nav-right .nav-cta{display:none}
+  .nav-links,.nav-phone,.nav-right .nav-cta,.nav-cta-link{display:none}
   .hamburger{display:flex}
+  .nav-logo img{height:64px}
   section{padding:86px 0}
   .wrap{padding:0 28px}
   .nav-in{padding:0 28px;height:80px}
