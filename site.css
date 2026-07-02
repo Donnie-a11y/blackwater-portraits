@@ -318,10 +318,14 @@ footer{background:var(--cream);color:var(--mushroom);padding:104px 0 42px;border
   section{padding:86px 0}
   .wrap{padding:0 28px}
   .nav-in{padding:0 28px;height:80px}
-  .hero{grid-template-columns:1fr}
-  .hero-media{min-height:56vh;order:-1}
-  .hero-media img{position:relative}
-  .hero-panel{padding:64px 30px 58px}
+  .hero{display:block;position:relative;min-height:100vh}
+  .hero-media{position:absolute;inset:0;min-height:0;order:0}
+  .hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
+  .hero-media::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(40,31,24,.32),rgba(40,31,24,.08) 40%,rgba(40,31,24,.94))}
+  .hero-panel{position:relative;z-index:2;background:none;min-height:100vh;justify-content:flex-end;padding:120px 28px 56px}
+  .hero-panel h1{font-size:clamp(32px,8.8vw,40px);line-height:1.08}
+  .hero-panel .sub{font-size:17px;margin-bottom:34px;color:rgba(251,248,241,.92)}
+  .hero-panel h1,.hero-panel .sub,.hero-panel .eyebrow,.hero-meta{text-shadow:0 2px 14px rgba(40,31,24,.55)}
   .phero{min-height:64vh}
   .phero-in{padding:0 28px 66px}
   .chero{padding:130px 0 74px}
