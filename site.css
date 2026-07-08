@@ -295,14 +295,19 @@ footer{background:var(--cream);color:var(--mushroom);padding:104px 0 42px;border
 .foot-r a{display:block;font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--cocoa);padding:7px 0;font-weight:300;transition:.2s}
 .foot-r a:hover{color:var(--gold-deep)}
 .foot-rule{height:1px;background:var(--line);margin:66px 0 26px}
+.foot-area{font-family:var(--sans);font-size:12.5px;letter-spacing:.03em;color:var(--mushroom);line-height:1.9;margin-bottom:28px;font-weight:300}
 .foot-legal2{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--sans);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mocha)}
 .foot-legal2 a{color:var(--gold-deep);transition:.2s}
 .foot-legal2 a:hover{color:var(--espresso)}
 
 /* credentials / trust band */
 .creds-band{text-align:center}
-.cred-copy{font-family:var(--serif);font-style:italic;font-size:clamp(20px,2.4vw,27px);line-height:1.5;color:var(--mocha);max-width:36ch;margin:20px auto 0}
-.cred-star{font-family:var(--sans);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-deep);font-weight:600;margin-top:22px;line-height:1.8}
+.cred-copy{font-family:var(--serif);font-style:italic;font-size:clamp(20px,2.4vw,27px);line-height:1.5;color:var(--mocha);max-width:36ch;margin:20px auto 0;text-align:center}
+.cred-star{font-family:var(--sans);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-deep);font-weight:600;margin:22px auto 0;line-height:1.8;text-align:center}
+.cred-logos{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:46px;margin:34px auto 0;max-width:760px}
+.cred-logos img{height:56px;width:auto;opacity:.85;filter:grayscale(1);transition:.3s ease}
+.cred-logos img:hover{opacity:1;filter:grayscale(0)}
+@media(max-width:600px){.cred-logos{gap:30px}.cred-logos img{height:44px}}
 
 /* reveal */
 .reveal{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
