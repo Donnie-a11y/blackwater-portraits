@@ -346,6 +346,12 @@ footer{background:var(--cream);color:var(--mushroom);padding:104px 0 42px;border
 }
 @media(max-width:520px){
   .cats,.cats.five,.gallery,.g2{grid-template-columns:1fr}
-  .foot-r{grid-template-columns:1fr 1fr}
+  footer{padding:76px 0 40px}
+  .foot-grid{gap:40px}
+  .foot-r{grid-template-columns:1fr;gap:30px}
+  .foot-r h4{margin-bottom:14px}
+  .foot-rule{margin:44px 0 24px}
+  .foot-legal2{gap:16px;line-height:1.9;text-align:center}
+  .foot-legal2 span{display:block;width:100%}
   .creds-in{font-size:9px;letter-spacing:.16em;gap:10px}
 }
