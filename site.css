@@ -299,6 +299,11 @@ footer{background:var(--cream);color:var(--mushroom);padding:104px 0 42px;border
 .foot-legal2 a{color:var(--gold-deep);transition:.2s}
 .foot-legal2 a:hover{color:var(--espresso)}
 
+/* credentials / trust band */
+.creds-band{text-align:center}
+.cred-copy{font-family:var(--serif);font-style:italic;font-size:clamp(20px,2.4vw,27px);line-height:1.5;color:var(--mocha);max-width:36ch;margin:20px auto 0}
+.cred-star{font-family:var(--sans);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-deep);font-weight:600;margin-top:22px;line-height:1.8}
+
 /* reveal */
 .reveal{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
