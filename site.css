@@ -338,17 +338,21 @@ footer{background:var(--cream);color:var(--mushroom);padding:104px 0 42px;border
   .gallery,.g2{grid-template-columns:repeat(2,1fr)}
   .guarantee{flex-direction:column;text-align:center}
   .guarantee .gc{text-align:center}
-  .foot-grid{grid-template-columns:1fr;gap:44px}
-  .foot-legal2{justify-content:center;text-align:center}
+  .foot-grid{grid-template-columns:1fr;gap:40px}
+  .foot-logo-img{height:120px}
+  .foot-tag{font-size:23px}
+  .foot-legal2{flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;line-height:1.8}
+  .foot-legal2 span{width:100%}
   .form-card{padding:34px 24px}
   .faq .q{font-size:20px}
   .row2{grid-template-columns:1fr}
 }
 @media(max-width:520px){
   .cats,.cats.five,.gallery,.g2{grid-template-columns:1fr}
-  footer{padding:76px 0 40px}
-  .foot-grid{gap:40px}
-  .foot-r{grid-template-columns:1fr;gap:30px}
+  footer{padding:64px 0 38px}
+  .foot-logo-img{height:104px}
+  .foot-grid{gap:36px}
+  .foot-r{grid-template-columns:1fr;gap:28px}
   .foot-r h4{margin-bottom:14px}
   .foot-rule{margin:44px 0 24px}
   .foot-legal2{gap:16px;line-height:1.9;text-align:center}
