@@ -40,8 +40,9 @@
   .post-head{text-align:center;padding:180px 0 20px}
   .post-cat{font-family:var(--sans);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-deep);font-weight:500}
   .post-meta{font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mushroom);margin-top:18px}
-  .post-hero{margin:44px 0 10px;overflow:hidden;aspect-ratio:3/2}
-  .post-hero img{width:100%;height:100%;object-fit:cover}
+  /* Portrait source (4:5) shown in its true proportion — no crop, no distortion. */
+  .post-hero{margin:44px auto 10px;overflow:hidden;max-width:560px}
+  .post-hero img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
   .post-body{padding:20px 0 40px}
   .post-body p{font-size:17px;line-height:1.85;color:var(--espresso);margin:0 0 22px;font-weight:300}
   .post-body h2{font-family:var(--serif);font-weight:500;font-size:clamp(26px,3vw,34px);color:var(--espresso);margin:44px 0 14px;line-height:1.15}
