@@ -270,9 +270,10 @@ ul.clean li::before{content:"";position:absolute;left:0;top:12px;width:16px;heig
 .article h3{font-size:25px;margin-bottom:10px;line-height:1.12}
 .article p{font-size:14px;color:var(--mushroom);margin-bottom:14px}
 .article .rd{font-family:var(--sans);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep)}
-.feature-article{display:grid;grid-template-columns:1.15fr .85fr;gap:0;margin-bottom:70px;border:1px solid var(--line)}
-.feature-article .im{overflow:hidden;min-height:440px;position:relative}
-.feature-article .im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.feature-article{display:grid;grid-template-columns:.85fr 1.15fr;gap:0;margin-bottom:70px;border:1px solid var(--line)}
+/* Frame matches the source image's native 4:5 proportion, so nothing is cropped or distorted. */
+.feature-article .im{overflow:hidden;position:relative;aspect-ratio:4/5;align-self:start}
+.feature-article .im img{display:block;width:100%;height:100%;object-fit:cover;object-position:center center}
 .feature-article .body{padding:70px 64px;display:flex;flex-direction:column;justify-content:center}
 
 /* CTA band */
@@ -295,9 +296,18 @@ footer{background:var(--cream);color:var(--mushroom);padding:104px 0 42px;border
 .foot-r a{display:block;font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--cocoa);padding:7px 0;font-weight:300;transition:.2s}
 .foot-r a:hover{color:var(--gold-deep)}
 .foot-rule{height:1px;background:var(--line);margin:66px 0 26px}
+.foot-area{font-family:var(--sans);font-size:12.5px;letter-spacing:.03em;color:var(--mushroom);line-height:1.9;margin-bottom:28px;font-weight:300}
 .foot-legal2{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--sans);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mocha)}
 .foot-legal2 a{color:var(--gold-deep);transition:.2s}
 .foot-legal2 a:hover{color:var(--espresso)}
+
+/* credentials / trust band */
+.creds-band{text-align:center}
+.cred-copy{font-family:var(--serif);font-style:italic;font-size:clamp(20px,2.4vw,27px);line-height:1.5;color:var(--mocha);max-width:36ch;margin:20px auto 0;text-align:center}
+.cred-star{font-family:var(--sans);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-deep);font-weight:600;margin:22px auto 0;line-height:1.8;text-align:center}
+.cred-logos{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:40px 54px;margin:40px auto 0;max-width:840px}
+.cred-logos img{max-width:150px;max-height:62px;width:auto;height:auto;object-fit:contain;display:block}
+@media(max-width:600px){.cred-logos{gap:26px 40px}.cred-logos img{max-width:118px;max-height:48px}}
 
 /* reveal */
 .reveal{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
@@ -333,19 +343,29 @@ footer{background:var(--cream);color:var(--mushroom);padding:104px 0 42px;border
   .row .media{min-height:60vh;order:-1}
   .row.rev .media{order:-1}
   .row .body,.row.pad .body{padding:58px 30px}
-  .feature-article .im{min-height:56vh}
+  .feature-article .im{aspect-ratio:4/5;align-self:stretch}
   .feature-article .body{padding:48px 30px}
   .gallery,.g2{grid-template-columns:repeat(2,1fr)}
   .guarantee{flex-direction:column;text-align:center}
   .guarantee .gc{text-align:center}
-  .foot-grid{grid-template-columns:1fr;gap:44px}
-  .foot-legal2{justify-content:center;text-align:center}
+  .foot-grid{grid-template-columns:1fr;gap:40px}
+  .foot-logo-img{height:120px}
+  .foot-tag{font-size:23px}
+  .foot-legal2{flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;line-height:1.8}
+  .foot-legal2 span{width:100%}
   .form-card{padding:34px 24px}
   .faq .q{font-size:20px}
   .row2{grid-template-columns:1fr}
 }
 @media(max-width:520px){
   .cats,.cats.five,.gallery,.g2{grid-template-columns:1fr}
-  .foot-r{grid-template-columns:1fr 1fr}
+  footer{padding:64px 0 38px}
+  .foot-logo-img{height:104px}
+  .foot-grid{gap:36px}
+  .foot-r{grid-template-columns:1fr;gap:28px}
+  .foot-r h4{margin-bottom:14px}
+  .foot-rule{margin:44px 0 24px}
+  .foot-legal2{gap:16px;line-height:1.9;text-align:center}
+  .foot-legal2 span{display:block;width:100%}
   .creds-in{font-size:9px;letter-spacing:.16em;gap:10px}
 }
