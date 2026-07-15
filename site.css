@@ -307,6 +307,12 @@ footer{background:var(--cream);color:var(--mushroom);padding:104px 0 42px;border
 .cred-star{font-family:var(--sans);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-deep);font-weight:600;margin:22px auto 0;line-height:1.8;text-align:center}
 .cred-logos{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:40px 54px;margin:40px auto 0;max-width:840px}
 .cred-logos img{max-width:150px;max-height:62px;width:auto;height:auto;object-fit:contain;display:block}
+/* Featured honor — leads the recognition band */
+.cred-honor{font-family:var(--serif);font-weight:500;font-size:clamp(28px,3.8vw,44px);line-height:1.12;letter-spacing:-.01em;color:var(--espresso);max-width:20ch;margin:14px auto 0;text-align:center}
+.cred-honor em{font-style:italic;color:var(--gold-deep)}
+.cred-honor-sub{font-family:var(--sans);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mushroom);font-weight:500;margin:16px auto 0;line-height:1.7;text-align:center}
+.cred-rule{width:60px;height:1px;background:var(--gold);margin:30px auto}
+.cred-mem{font-family:var(--serif);font-style:italic;font-size:clamp(16px,1.9vw,20px);line-height:1.55;color:var(--mocha);max-width:46ch;margin:0 auto;text-align:center}
 @media(max-width:600px){.cred-logos{gap:26px 40px}.cred-logos img{max-width:118px;max-height:48px}}
 
 /* reveal */
