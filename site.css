@@ -404,15 +404,22 @@ footer{background:var(--cream);color:var(--mushroom);padding:104px 0 42px;border
 .pos .subline .nb{white-space:nowrap}
 
 @media(max-width:900px){
-  /* Home hero: stop stacking copy on top of the photo. Same split treatment
-     as the Wonder of Christmas hero: full uncropped image, copy on solid. */
+  /* Home hero: copy sits below the photo on solid ground, never on top of it.
+     The frame is square, not 4:5 — p01 is 1200x1500, i.e. TALLER than square,
+     so a 1:1 frame trims top and bottom (sky and bricks) and keeps the full
+     width. Nobody loses an arm, and the headline + CTA clear the fold on a
+     375px phone: 80 nav + 375 image + ~200 copy = 655 of 667. */
   .hero{display:flex;flex-direction:column;min-height:0}
-  .hero-media{position:relative;inset:auto;order:-1;width:100%;aspect-ratio:4/5;min-height:0}
-  .hero-media img{position:absolute;inset:0;object-position:center center}
+  .hero-media{position:relative;inset:auto;order:-1;width:100%;aspect-ratio:1/1;min-height:0}
+  .hero-media img{position:absolute;inset:0;object-position:center 22%}  /* bias to faces */
   .hero-media::after{display:none}
   .hero-panel{position:relative;z-index:2;min-height:0;justify-content:flex-start;
-    background:linear-gradient(150deg,#5a483a,#2f251d 78%);padding:54px 28px 62px}
+    background:linear-gradient(150deg,#5a483a,#2f251d 78%);padding:32px 28px 40px}
   .hero-panel h1,.hero-panel .sub,.hero-panel .eyebrow,.hero-meta{text-shadow:none}
+  .hero-panel .eyebrow{margin-bottom:16px}
+  .hero-panel .sub{margin-bottom:26px}
+  .hero-cta{margin-bottom:0;gap:18px}
+  .hero-meta{display:none}   /* the category tiles sit right below; no need to list them twice */
 
   .row .media{min-height:0;aspect-ratio:4/5}
   .row .media.wide{aspect-ratio:5/4}
