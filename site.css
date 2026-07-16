@@ -375,3 +375,52 @@ footer{background:var(--cream);color:var(--mushroom);padding:104px 0 42px;border
   .foot-legal2 span{display:block;width:100%}
   .creds-in{font-size:9px;letter-spacing:.16em;gap:10px}
 }
+
+
+/* ============================================================
+   IMAGE FRAMING FIX
+   A fine art studio never chops a head. Every frame's ratio now
+   matches its actual source file, so object-fit:cover has nothing
+   left to crop. Ratios verified against the real image dimensions.
+   ============================================================ */
+
+/* Editorial rows. Every .row image is a 4:5 portrait (donnie.jpg 880x1100,
+   p01/p13/p27 1200x1500) except two landscape files marked .wide. */
+.row .media{min-height:0;aspect-ratio:4/5}
+.row .media.wide{aspect-ratio:5/4}          /* animals p23, what-to-wear p03 (1500x1200) */
+.row .media img{object-position:center center}
+
+/* Category tiles: p17 / p18 / p12 / p21 are all 1500x1200 = 5:4 landscape.
+   The old 4:5 portrait frame was cutting 44% off the width. */
+.cat{aspect-ratio:5/4}
+.cat img{object-position:center center}
+
+/* Galleries stay 4:5 portrait. Bias the crop toward the top so a face is
+   never the thing that gets cut when a file is taller than the frame. */
+.gallery .g img{object-position:center 18%}
+.gallery .g.wide{aspect-ratio:5/4}
+
+/* Keep the service-area line from orphaning "Pennsylvania" onto its own row */
+.pos .subline .nb{white-space:nowrap}
+
+@media(max-width:900px){
+  /* Home hero: copy sits below the photo on solid ground, never on top of it.
+     The frame is square, not 4:5 — p01 is 1200x1500, i.e. TALLER than square,
+     so a 1:1 frame trims top and bottom (sky and bricks) and keeps the full
+     width. Nobody loses an arm, and the headline + CTA clear the fold on a
+     375px phone: 80 nav + 375 image + ~200 copy = 655 of 667. */
+  .hero{display:flex;flex-direction:column;min-height:0}
+  .hero-media{position:relative;inset:auto;order:-1;width:100%;aspect-ratio:1/1;min-height:0}
+  .hero-media img{position:absolute;inset:0;object-position:center 22%}  /* bias to faces */
+  .hero-media::after{display:none}
+  .hero-panel{position:relative;z-index:2;min-height:0;justify-content:flex-start;
+    background:linear-gradient(150deg,#5a483a,#2f251d 78%);padding:32px 28px 40px}
+  .hero-panel h1,.hero-panel .sub,.hero-panel .eyebrow,.hero-meta{text-shadow:none}
+  .hero-panel .eyebrow{margin-bottom:16px}
+  .hero-panel .sub{margin-bottom:26px}
+  .hero-cta{margin-bottom:0;gap:18px}
+  .hero-meta{display:none}   /* the category tiles sit right below; no need to list them twice */
+
+  .row .media{min-height:0;aspect-ratio:4/5}
+  .row .media.wide{aspect-ratio:5/4}
+}
