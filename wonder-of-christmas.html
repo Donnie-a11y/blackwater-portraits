@@ -200,6 +200,34 @@
   .woc-line{flex-direction:column;gap:6px}
   .wf button{font-size:19px;padding-right:36px}
 }
+
+/* ===== EVERYTHING CENTERED — desktop and mobile.
+   Last block in the sheet so it wins on source order. Auto margins keep the
+   centering true at every width, not just the text inside the box. ===== */
+.woc h2,.woc h3{text-align:center}
+.woc p{text-align:center;margin-left:auto;margin-right:auto}
+/* offer bar: .woc p clamps this <p> to 62ch and pins it left, so override both */
+.woc-offerbar .t{max-width:46ch;margin-left:auto;margin-right:auto}
+.woc .kick,.woc .eye{display:block;text-align:center}
+.woc .rulec{margin-left:auto;margin-right:auto}
+.woc .btn-x,.woc .btn-o{margin-left:auto;margin-right:auto}
+/* split sections: center the copy column and its buttons */
+.woc-split .grid > div{text-align:center}
+.woc-split .grid > div > a.btn-o{display:inline-block}
+/* cards + steps */
+.woc-card{text-align:center}
+.woc-flow{text-align:center}
+.woc-step{text-align:center}
+/* itemised reserve box: stack each row centered instead of label-left/price-right */
+.woc-line{flex-direction:column;align-items:center;gap:8px;text-align:center}
+.woc-line .l,.woc-line .l small,.woc-line .v{text-align:center}
+/* FAQ: question text centered, the +/- stays pinned right */
+.wf button{text-align:center;padding-left:44px;padding-right:44px}
+.wf .ans p{text-align:center;margin-left:auto;margin-right:auto}
+/* form: centered labels (typed input text stays left for legibility) */
+.wform label{text-align:center}
+.wform .chk{justify-content:center;text-align:center}
+.wform .chk label{text-align:center}
 </style>
 </head>
 <body>
@@ -341,7 +369,7 @@
     <div class="wrapx center">
       <span class="eye">From Here</span>
       <h2 style="margin-top:14px">From reserving <em>to artwork</em></h2>
-      <div class="woc-flow" style="text-align:left">
+      <div class="woc-flow">
         <div class="woc-step"><div class="sn">01</div><h3>Reserve</h3><p>Send us your family's details below. We confirm your date and time personally.</p></div>
         <div class="woc-step"><div class="sn">02</div><h3>Plan</h3><p>We guide your wardrobe and answer every question before the day arrives.</p></div>
         <div class="woc-step"><div class="sn">03</div><h3>The Session</h3><p>An unhurried, guided Santa session on our styled Christmas set.</p></div>
