@@ -40,3 +40,18 @@
     });});
   }
 })();
+
+// Footer legal links (Privacy Policy / Terms) — injected site-wide so every
+// page's footer links to the legal pages without editing each page.
+(function(){
+  function addLegal(){
+    var fl=document.querySelector('.foot-legal2');
+    if(!fl) return;
+    if(fl.querySelector('a[href="privacy.html"]')) return; // already present
+    var s=document.createElement('span');
+    s.innerHTML='<a href="privacy.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(194,167,106,.45)">Privacy Policy</a>&nbsp;&middot;&nbsp;<a href="terms.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(194,167,106,.45)">Terms &amp; Conditions</a>';
+    var first=fl.querySelector('span');
+    if(first&&first.nextSibling){fl.insertBefore(s,first.nextSibling);}else{fl.appendChild(s);}
+  }
+  if(document.readyState!=='loading')addLegal();else document.addEventListener('DOMContentLoaded',addLegal);
+})();
