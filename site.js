@@ -56,7 +56,10 @@
     var laz=[].slice.call(document.querySelectorAll('img[loading="lazy"]'));
     laz.forEach(function(i){i.setAttribute('decoding','async');});
     function eager(i){ if(i.getAttribute('loading')==='lazy'){ i.setAttribute('loading','eager'); } }
-    // Anything already in or just below the first screen: load now.
+    // On phones, load every photograph up front so nothing ever shows as a
+    // blank frame while scrolling on a slower connection.
+    if(window.innerWidth<=900){ laz.forEach(eager); return; }
+    // Desktop: anything in or just below the first screen loads now.
     laz.forEach(function(i){
       var t=i.getBoundingClientRect().top;
       if(t < window.innerHeight*1.4){ eager(i); }

@@ -526,3 +526,43 @@ footer .wrap{max-width:1160px}
   .foot-legal2{flex-direction:column;align-items:flex-start;text-align:left;gap:14px}
   .foot-legal2 span{width:auto}
 }
+
+/* ============================================================
+MOBILE PORTRAIT DISPLAY (2026-07 pass 2)
+A fine art studio never chops a head or feet. On phones the primary
+photographs — the hero, the editorial split-row images, and the
+recent-work gallery — are shown at their NATURAL aspect ratio rather
+than being forced into a fixed frame with object-fit:cover. Whole
+portrait, every time. (The small decorative category tiles keep their
+frame; their source files already match it, so nothing is cropped.)
+============================================================ */
+@media(max-width:900px){
+  /* Home hero: full portrait, heads and feet intact (was a 1:1 square
+     crop that cut the tops of heads off a 4:5 photo). */
+  .hero-media{position:relative;inset:auto;order:-1;width:100%;
+    aspect-ratio:auto!important;min-height:0!important;height:auto;overflow:visible}
+  .hero-media img{position:static;width:100%;height:auto;
+    object-fit:contain;object-position:center}
+  .hero-media::after{display:none}
+
+  /* Editorial split-row photos: natural height, never cropped. */
+  .row .media,.row .media.wide{aspect-ratio:auto!important;min-height:0!important;
+    height:auto;order:-1;overflow:visible}
+  .row .media img{position:static;width:100%;height:auto;
+    object-fit:contain;object-position:center}
+
+  /* Recent-work gallery: one clean column of whole portraits. */
+  .gallery{grid-template-columns:1fr!important;gap:12px}
+  .gallery .g,.gallery .g.wide{aspect-ratio:auto!important;height:auto;overflow:visible}
+  .gallery .g img{position:static;width:100%;height:auto;object-fit:contain}
+}
+
+/* Smallest phones: keep the natural (uncropped) sizing, overriding the
+   earlier 5:6 crop rule for rows. */
+@media(max-width:520px){
+  .row .media,.row .media.wide,.hero-media{aspect-ratio:auto!important;height:auto!important}
+}
+
+/* Where a fixed frame is still used (category tiles), bias the crop
+   toward the top so a face is never what gets trimmed. */
+.cat img{object-position:center 18%}
