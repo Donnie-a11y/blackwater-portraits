@@ -1,17 +1,17 @@
 /* ============================================================
-   Blackwater Fine Art Portraits - shared design system
-   Warm meets Modern - ivory / champagne gold / espresso / mocha
-   ============================================================ */
+Blackwater Fine Art Portraits - shared design system
+Warm meets Modern - ivory / champagne gold / espresso / mocha
+============================================================ */
 :root{
-  --ivory:#FBF8F1; --cream:#F4EDDF; --sand:#EAE0CC; --greige:#D8CBB4; --taupe:#BCAB8E;
-  --mushroom:#8C7C68; --mocha:#6E5A48; --espresso:#463A30; --cocoa:#281F18;
-  --gold:#C2A76A; --gold-deep:#9A7F45; --gold-soft:#E4D4AC;
-  --line:#E7DDCA; --line-2:#F0E8D8; --line-dk:rgba(226,207,163,.16);
-  --serif:'Cormorant Garamond',Georgia,serif;
-  --sans:'Montserrat',-apple-system,Helvetica,Arial,sans-serif;
-  --maxw:1240px;
-  --shadow:0 40px 90px -50px rgba(40,31,24,.6);
-  --shadow-sm:0 20px 50px -34px rgba(40,31,24,.55);
+--ivory:#FBF8F1; --cream:#F4EDDF; --sand:#EAE0CC; --greige:#D8CBB4; --taupe:#BCAB8E;
+--mushroom:#8C7C68; --mocha:#6E5A48; --espresso:#463A30; --cocoa:#281F18;
+--gold:#C2A76A; --gold-deep:#9A7F45; --gold-soft:#E4D4AC;
+--line:#E7DDCA; --line-2:#F0E8D8; --line-dk:rgba(226,207,163,.16);
+--serif:'Cormorant Garamond',Georgia,serif;
+--sans:'Montserrat',-apple-system,Helvetica,Arial,sans-serif;
+--maxw:1240px;
+--shadow:0 40px 90px -50px rgba(40,31,24,.6);
+--shadow-sm:0 20px 50px -34px rgba(40,31,24,.55);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:104px}
@@ -322,81 +322,80 @@ footer{background:var(--cream);color:var(--mushroom);padding:104px 0 42px;border
 
 /* responsive */
 @media(max-width:1000px){
-  .cats,.cats.five{grid-template-columns:repeat(2,1fr)}
-  .journey,.journey.five{grid-template-columns:repeat(2,1fr);gap:36px}
-  .pillars,.g3,.quotes,.articles,.collections{grid-template-columns:1fr}
+.cats,.cats.five{grid-template-columns:repeat(2,1fr)}
+.journey,.journey.five{grid-template-columns:repeat(2,1fr);gap:36px}
+.pillars,.g3,.quotes,.articles,.collections{grid-template-columns:1fr}
 }
 @media(max-width:880px){
-  .nav-links,.nav-phone,.nav-right .nav-cta,.nav-cta-link{display:none}
-  .hamburger{display:flex}
-  .nav-logo img{height:64px}
-  .topnav:not(.solid){background:linear-gradient(180deg,rgba(40,31,24,.6),rgba(40,31,24,0))}
-  section{padding:86px 0}
-  .wrap{padding:0 28px}
-  .nav-in{padding:0 28px;height:80px}
-  .hero{display:block;position:relative;min-height:100vh}
-  .hero-media{position:absolute;inset:0;min-height:0;order:0}
-  .hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
-  .hero-media::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(40,31,24,.32),rgba(40,31,24,.08) 40%,rgba(40,31,24,.94))}
-  .hero-panel{position:relative;z-index:2;background:none;min-height:100vh;justify-content:flex-end;padding:120px 28px 56px}
-  .hero-panel h1{font-size:clamp(32px,8.8vw,40px);line-height:1.08}
-  .hero-panel .sub{font-size:17px;margin-bottom:34px;color:rgba(251,248,241,.92)}
-  .hero-panel h1,.hero-panel .sub,.hero-panel .eyebrow,.hero-meta{text-shadow:0 2px 14px rgba(40,31,24,.55)}
-  .phero{min-height:64vh}
-  .phero-in{padding:0 28px 66px}
-  .chero{padding:130px 0 74px}
-  .row,.invest,.contact-in,.feature-article{grid-template-columns:1fr}
-  .row .media{min-height:60vh;order:-1}
-  .row.rev .media{order:-1}
-  .row .body,.row.pad .body{padding:58px 30px}
-  .feature-article .im{aspect-ratio:4/5;align-self:stretch}
-  .feature-article .body{padding:48px 30px}
-  .gallery,.g2{grid-template-columns:repeat(2,1fr)}
-  .guarantee{flex-direction:column;text-align:center}
-  .guarantee .gc{text-align:center}
-  .foot-grid{grid-template-columns:1fr;gap:40px}
-  .foot-logo-img{height:120px}
-  .foot-tag{font-size:23px}
-  .foot-legal2{flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;line-height:1.8}
-  .foot-legal2 span{width:100%}
-  .form-card{padding:34px 24px}
-  .faq .q{font-size:20px}
-  .row2{grid-template-columns:1fr}
+.nav-links,.nav-phone,.nav-right .nav-cta,.nav-cta-link{display:none}
+.hamburger{display:flex}
+.nav-logo img{height:64px}
+.topnav:not(.solid){background:linear-gradient(180deg,rgba(40,31,24,.6),rgba(40,31,24,0))}
+section{padding:86px 0}
+.wrap{padding:0 28px}
+.nav-in{padding:0 28px;height:80px}
+.hero{display:block;position:relative;min-height:100vh}
+.hero-media{position:absolute;inset:0;min-height:0;order:0}
+.hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.hero-media::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(40,31,24,.32),rgba(40,31,24,.08) 40%,rgba(40,31,24,.94))}
+.hero-panel{position:relative;z-index:2;background:none;min-height:100vh;justify-content:flex-end;padding:120px 28px 56px}
+.hero-panel h1{font-size:clamp(32px,8.8vw,40px);line-height:1.08}
+.hero-panel .sub{font-size:17px;margin-bottom:34px;color:rgba(251,248,241,.92)}
+.hero-panel h1,.hero-panel .sub,.hero-panel .eyebrow,.hero-meta{text-shadow:0 2px 14px rgba(40,31,24,.55)}
+.phero{min-height:64vh}
+.phero-in{padding:0 28px 66px}
+.chero{padding:130px 0 74px}
+.row,.invest,.contact-in,.feature-article{grid-template-columns:1fr}
+.row .media{min-height:60vh;order:-1}
+.row.rev .media{order:-1}
+.row .body,.row.pad .body{padding:58px 30px}
+.feature-article .im{aspect-ratio:4/5;align-self:stretch}
+.feature-article .body{padding:48px 30px}
+.gallery,.g2{grid-template-columns:repeat(2,1fr)}
+.guarantee{flex-direction:column;text-align:center}
+.guarantee .gc{text-align:center}
+.foot-grid{grid-template-columns:1fr;gap:40px}
+.foot-logo-img{height:120px}
+.foot-tag{font-size:23px}
+.foot-legal2{flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;line-height:1.8}
+.foot-legal2 span{width:100%}
+.form-card{padding:34px 24px}
+.faq .q{font-size:20px}
+.row2{grid-template-columns:1fr}
 }
 @media(max-width:520px){
-  .cats,.cats.five,.gallery,.g2{grid-template-columns:1fr}
-  footer{padding:64px 0 38px}
-  .foot-logo-img{height:104px}
-  .foot-grid{gap:36px}
-  .foot-r{grid-template-columns:1fr;gap:28px}
-  .foot-r h4{margin-bottom:14px}
-  .foot-rule{margin:44px 0 24px}
-  .foot-legal2{gap:16px;line-height:1.9;text-align:center}
-  .foot-legal2 span{display:block;width:100%}
-  .creds-in{font-size:9px;letter-spacing:.16em;gap:10px}
+.cats,.cats.five,.gallery,.g2{grid-template-columns:1fr}
+footer{padding:64px 0 38px}
+.foot-logo-img{height:104px}
+.foot-grid{gap:36px}
+.foot-r{grid-template-columns:1fr;gap:28px}
+.foot-r h4{margin-bottom:14px}
+.foot-rule{margin:44px 0 24px}
+.foot-legal2{gap:16px;line-height:1.9;text-align:center}
+.foot-legal2 span{display:block;width:100%}
+.creds-in{font-size:9px;letter-spacing:.16em;gap:10px}
 }
 
-
 /* ============================================================
-   IMAGE FRAMING FIX
-   A fine art studio never chops a head. Every frame's ratio now
-   matches its actual source file, so object-fit:cover has nothing
-   left to crop. Ratios verified against the real image dimensions.
-   ============================================================ */
+IMAGE FRAMING FIX
+A fine art studio never chops a head. Every frame's ratio now
+matches its actual source file, so object-fit:cover has nothing
+left to crop. Ratios verified against the real image dimensions.
+============================================================ */
 
 /* Editorial rows. Every .row image is a 4:5 portrait (donnie.jpg 880x1100,
-   p01/p13/p27 1200x1500) except two landscape files marked .wide. */
+p01/p13/p27 1200x1500) except two landscape files marked .wide. */
 .row .media{min-height:0;aspect-ratio:4/5}
-.row .media.wide{aspect-ratio:5/4}          /* animals p23, what-to-wear p03 (1500x1200) */
+.row .media.wide{aspect-ratio:5/4} /* animals p23, what-to-wear p03 (1500x1200) */
 .row .media img{object-position:center center}
 
 /* Category tiles: p17 / p18 / p12 / p21 are all 1500x1200 = 5:4 landscape.
-   The old 4:5 portrait frame was cutting 44% off the width. */
+The old 4:5 portrait frame was cutting 44% off the width. */
 .cat{aspect-ratio:5/4}
 .cat img{object-position:center center}
 
 /* Galleries stay 4:5 portrait. Bias the crop toward the top so a face is
-   never the thing that gets cut when a file is taller than the frame. */
+never the thing that gets cut when a file is taller than the frame. */
 .gallery .g img{object-position:center 18%}
 .gallery .g.wide{aspect-ratio:5/4}
 
@@ -404,23 +403,116 @@ footer{background:var(--cream);color:var(--mushroom);padding:104px 0 42px;border
 .pos .subline .nb{white-space:nowrap}
 
 @media(max-width:900px){
-  /* Home hero: copy sits below the photo on solid ground, never on top of it.
-     The frame is square, not 4:5 — p01 is 1200x1500, i.e. TALLER than square,
-     so a 1:1 frame trims top and bottom (sky and bricks) and keeps the full
-     width. Nobody loses an arm, and the headline + CTA clear the fold on a
-     375px phone: 80 nav + 375 image + ~200 copy = 655 of 667. */
-  .hero{display:flex;flex-direction:column;min-height:0}
-  .hero-media{position:relative;inset:auto;order:-1;width:100%;aspect-ratio:1/1;min-height:0}
-  .hero-media img{position:absolute;inset:0;object-position:center 22%}  /* bias to faces */
-  .hero-media::after{display:none}
-  .hero-panel{position:relative;z-index:2;min-height:0;justify-content:flex-start;
-    background:linear-gradient(150deg,#5a483a,#2f251d 78%);padding:32px 28px 40px}
-  .hero-panel h1,.hero-panel .sub,.hero-panel .eyebrow,.hero-meta{text-shadow:none}
-  .hero-panel .eyebrow{margin-bottom:16px}
-  .hero-panel .sub{margin-bottom:26px}
-  .hero-cta{margin-bottom:0;gap:18px}
-  .hero-meta{display:none}   /* the category tiles sit right below; no need to list them twice */
+/* Home hero: copy sits below the photo on solid ground, never on top of it.
+The frame is square, not 4:5 — p01 is 1200x1500, i.e. TALLER than square,
+so a 1:1 frame trims top and bottom (sky and bricks) and keeps the full
+width. Nobody loses an arm, and the headline + CTA clear the fold on a
+375px phone: 80 nav + 375 image + ~200 copy = 655 of 667. */
+.hero{display:flex;flex-direction:column;min-height:0}
+.hero-media{position:relative;inset:auto;order:-1;width:100%;aspect-ratio:1/1;min-height:0}
+.hero-media img{position:absolute;inset:0;object-position:center 22%} /* bias to faces */
+.hero-media::after{display:none}
+.hero-panel{position:relative;z-index:2;min-height:0;justify-content:flex-start;
+background:linear-gradient(150deg,#5a483a,#2f251d 78%);padding:32px 28px 40px}
+.hero-panel h1,.hero-panel .sub,.hero-panel .eyebrow,.hero-meta{text-shadow:none}
+.hero-panel .eyebrow{margin-bottom:16px}
+.hero-panel .sub{margin-bottom:26px}
+.hero-cta{margin-bottom:0;gap:18px}
+.hero-meta{display:none} /* the category tiles sit right below; no need to list them twice */
 
-  .row .media{min-height:0;aspect-ratio:4/5}
-  .row .media.wide{aspect-ratio:5/4}
+.row .media{min-height:0;aspect-ratio:4/5}
+.row .media.wide{aspect-ratio:5/4}
+}
+
+/* ============================================================
+MOBILE-FIRST RESPONSIVE FIXES + FOOTER REBUILD  (2026-07 pass)
+Shared-system corrections. Everything below is intentionally at
+the end so it wins the cascade over the rules above.
+============================================================ */
+
+/* ---- Prevent grid blow-out / image-over-text overlap ----
+   Grid items default to min-width:auto (min-content), so a long
+   heading or an intrinsic-width image can push a track wider than
+   its share and overlap the neighbouring column. Zeroing min-width
+   keeps every split layout honest at tablet/narrow-desktop widths. */
+.row>*,.invest>*,.row2>*,.g2>*,.g3>*,.foot-grid>*,.foot-r>*{min-width:0}
+html{max-width:100%;overflow-x:hidden}
+
+/* ---- Fluid split-row body padding ----
+   Fixed 100px/80px padding starved the text column between 880 and
+   1200px. Fluid padding gives copy room to breathe at every width. */
+.row .body{padding:clamp(52px,6vw,100px) clamp(28px,5vw,80px)}
+.row.pad .body{padding:clamp(56px,7vw,120px) clamp(30px,6vw,90px)}
+
+/* ---- Tablet / narrow-desktop: collapse split rows a touch sooner
+   so the two columns never get cramped or collide. ---- */
+@media(max-width:1024px){
+  .row{grid-template-columns:1fr}
+  .row .media{order:-1;aspect-ratio:4/5;min-height:0}
+  .row .media.wide{aspect-ratio:16/10}
+  .row .body{padding:clamp(44px,7vw,64px) clamp(28px,6vw,56px)}
+}
+
+/* ---- Mobile: force EVERY split row to a single column.
+   !important defeats inline grid-template-columns:1fr 1fr used on a
+   few pages (Model call "what we ask", children "Studio Collection")
+   which previously stayed two cramped columns on phones. ---- */
+@media(max-width:880px){
+  .row,.invest,.row2{grid-template-columns:1fr!important;gap:0}
+  .row[style*="grid-template-columns"]{gap:36px!important}
+  .row .media{aspect-ratio:4/5;min-height:0;order:-1}
+  .row .media.wide{aspect-ratio:4/5} /* portrait crop of landscape files reads better than a letterbox on a phone */
+  .invest{gap:44px!important}
+}
+
+/* On the narrowest phones give portraits a little less height so the
+   supporting copy is not pushed a full screen away. */
+@media(max-width:520px){
+  .row .media,.row .media.wide{aspect-ratio:5/6}
+}
+
+/* ============================================================
+FOOTER — rebuilt as a premium, intentional component.
+Warm cocoa ground with gold accents ties the page close back to
+the navigation and hero. Same markup, restyled + hardened for
+mobile so nothing floats, cramps, or collapses unpredictably.
+============================================================ */
+footer{background:var(--cocoa);color:rgba(251,248,241,.72);border-top:1px solid var(--line-dk);padding:clamp(56px,7vw,96px) 0 clamp(28px,4vw,40px)}
+footer .wrap{max-width:1160px}
+.foot-grid{grid-template-columns:1.3fr .9fr .9fr;gap:clamp(32px,5vw,72px);align-items:start}
+.foot-logo-img{height:clamp(84px,9vw,120px);width:auto;margin-bottom:24px}
+.foot-tag{font-family:var(--serif);font-style:italic;font-size:clamp(20px,2.2vw,25px);color:var(--gold-soft);max-width:22ch;line-height:1.45;margin-bottom:26px;font-weight:400}
+.foot-addr{font-family:var(--sans);font-size:13px;letter-spacing:.03em;color:rgba(251,248,241,.72);line-height:2.05;font-weight:300}
+.foot-addr a{color:rgba(251,248,241,.9);border-bottom:1px solid transparent;transition:.2s}
+.foot-addr a:hover{color:var(--gold);border-bottom-color:var(--gold)}
+.foot-r{display:contents} /* let the two link groups sit as real grid columns for aligned baselines */
+.foot-r>div{padding-top:6px}
+.foot-r h4{font-family:var(--sans);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;font-weight:600}
+.foot-r a{display:block;font-family:var(--sans);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(251,248,241,.78);padding:9px 0;font-weight:300;transition:.2s;border-bottom:none}
+.foot-r a:hover{color:var(--gold);padding-left:6px}
+.foot-rule{height:1px;background:var(--line-dk);margin:clamp(40px,5vw,60px) 0 24px}
+.foot-area{font-family:var(--sans);font-size:12px;letter-spacing:.03em;color:rgba(251,248,241,.5);line-height:1.9;margin-bottom:22px;font-weight:300;max-width:70ch}
+.foot-legal2{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px 26px;font-family:var(--sans);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(251,248,241,.5)}
+.foot-legal2 a{color:var(--gold);border-bottom:1px solid transparent;transition:.2s}
+.foot-legal2 a:hover{color:var(--gold-soft);border-bottom-color:var(--gold)}
+
+/* Footer — tablet: three columns become a tidy 1 + 2 arrangement */
+@media(max-width:900px){
+  .foot-grid{grid-template-columns:1fr 1fr;gap:40px 48px}
+  .foot-l{grid-column:1 / -1}
+  .foot-tag{max-width:30ch}
+}
+
+/* Footer — phone: one clean column, generous tap targets, aligned base row */
+@media(max-width:600px){
+  footer{padding:56px 0 34px}
+  .foot-grid{grid-template-columns:1fr;gap:34px}
+  .foot-l{grid-column:auto}
+  .foot-logo-img{height:96px;margin-bottom:20px}
+  .foot-r>div{padding-top:0}
+  .foot-r a{padding:12px 0;font-size:12.5px} /* >=44px tap target */
+  .foot-r h4{margin-bottom:10px}
+  .foot-rule{margin:36px 0 22px}
+  .foot-legal2{flex-direction:column;align-items:flex-start;text-align:left;gap:14px}
+  .foot-legal2 span{width:auto}
 }
