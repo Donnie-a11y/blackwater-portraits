@@ -444,6 +444,16 @@ html{max-width:100%;overflow-x:hidden}
 .row .body{padding:clamp(52px,6vw,100px) clamp(28px,5vw,80px)}
 .row.pad .body{padding:clamp(56px,7vw,120px) clamp(30px,6vw,90px)}
 
+/* ---- Desktop split rows: size the media from its COLUMN WIDTH and let
+   it stretch to the row height, never from aspect-ratio. A stretched grid
+   cell with aspect-ratio:4/5 computes its WIDTH from the (tall) stretched
+   height, which made the photo balloon ~140px past its 640px track and
+   sit on top of the neighbouring text. aspect-ratio:auto removes that;
+   the absolute, object-fit:cover image then fills the column cleanly. ---- */
+@media(min-width:1025px){
+  .row .media,.row .media.wide{aspect-ratio:auto;max-width:100%;min-height:560px}
+}
+
 /* ---- Tablet / narrow-desktop: collapse split rows a touch sooner
    so the two columns never get cramped or collide. ---- */
 @media(max-width:1024px){
