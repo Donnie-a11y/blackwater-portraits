@@ -80,8 +80,12 @@ font-family:var(--sans);color:var(--ink);background:var(--cream);overflow:hidden
 .woc-hero .scarce{margin-top:28px;font-family:var(--sans);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--golds)}
 .woc-hero .scarce b{color:#fff;font-weight:600}
 @media(max-width:900px){
-.woc-hero .hero-photo{aspect-ratio:auto}
-.woc-hero .hero-photo img{position:static;height:auto;object-fit:contain}
+/* Taller portrait frame on phones. A 4:5 crop of this 5:4 photo keeps the
+   FULL height (every head and both sets of feet stay in frame) and trims
+   only the side props, so Santa and the girl render much larger and are
+   easy to see. */
+.woc-hero .hero-photo{aspect-ratio:4/5}
+.woc-hero .hero-photo img{position:absolute;inset:0;height:100%;object-fit:cover;object-position:44% center}
 .woc-hero .hero-photo::after{height:120px}
 .woc-hero .hero-copy{padding:46px 26px 60px}
 }
