@@ -84,20 +84,27 @@
 // To update in future: set NEW_DIGITS / the display + dashed forms below.
 // ----------------------------------------------------------
 (function(){
-  var OLD_DIGITS='7402069039', NEW_DIGITS='7403913921';
+  var NEW_DIGITS='7403914921', NEW_DISPLAY='(740) 391-4921', NEW_DASH='740-391-4921';
+  var OLD_DIGITS=['7402069039','7403913921'];
+  var OLD_DISPLAY=['(740) 206-9039','(740) 391-3921'];
+  var OLD_DASH=['740-206-9039','740-391-3921'];
+  var TEST=/206-9039|391-3921|7402069039|7403913921/;
   function repl(s){
-    return s.split('(740) 206-9039').join('(740) 391-3921')
-            .split('740-206-9039').join('740-391-3921')
-            .split(OLD_DIGITS).join(NEW_DIGITS);
+    OLD_DISPLAY.forEach(function(o){s=s.split(o).join(NEW_DISPLAY);});
+    OLD_DASH.forEach(function(o){s=s.split(o).join(NEW_DASH);});
+    OLD_DIGITS.forEach(function(o){s=s.split(o).join(NEW_DIGITS);});
+    return s;
   }
   function fix(){
-    // Clickable tel: links (covers tel:7402069039 and tel:+17402069039)
-    document.querySelectorAll('a[href*="'+OLD_DIGITS+'"]').forEach(function(a){
-      a.setAttribute('href', a.getAttribute('href').split(OLD_DIGITS).join(NEW_DIGITS));
+    // Clickable tel: links (covers tel:7402069039 / tel:+1... and the interim number)
+    document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
+      var h=a.getAttribute('href'); if(!TEST.test(h)) return;
+      OLD_DIGITS.forEach(function(o){h=h.split(o).join(NEW_DIGITS);});
+      a.setAttribute('href', h);
     });
     // Visible text nodes + JSON-LD structured data
     var w=document.createTreeWalker(document.documentElement,NodeFilter.SHOW_TEXT,null),n,list=[];
-    while(n=w.nextNode()){ if(n.nodeValue && (n.nodeValue.indexOf('206-9039')>-1 || n.nodeValue.indexOf(OLD_DIGITS)>-1)) list.push(n); }
+    while(n=w.nextNode()){ if(n.nodeValue && TEST.test(n.nodeValue)) list.push(n); }
     list.forEach(function(nd){ nd.nodeValue=repl(nd.nodeValue); });
   }
   if(document.readyState!=='loading')fix();else document.addEventListener('DOMContentLoaded',fix);
