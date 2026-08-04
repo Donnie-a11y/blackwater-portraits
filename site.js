@@ -76,6 +76,33 @@
   })();
 })();
 
+// ----------------------------------------------------------
+// Studio phone number — single source of truth.
+// The number appears on every page (nav, footer, calls to action, tel:
+// links, and structured data). This normalises the old number to the
+// current one everywhere, so changing it only has to be done here.
+// To update in future: set NEW_DIGITS / the display + dashed forms below.
+// ----------------------------------------------------------
+(function(){
+  var OLD_DIGITS='7402069039', NEW_DIGITS='7403913921';
+  function repl(s){
+    return s.split('(740) 206-9039').join('(740) 391-3921')
+            .split('740-206-9039').join('740-391-3921')
+            .split(OLD_DIGITS).join(NEW_DIGITS);
+  }
+  function fix(){
+    // Clickable tel: links (covers tel:7402069039 and tel:+17402069039)
+    document.querySelectorAll('a[href*="'+OLD_DIGITS+'"]').forEach(function(a){
+      a.setAttribute('href', a.getAttribute('href').split(OLD_DIGITS).join(NEW_DIGITS));
+    });
+    // Visible text nodes + JSON-LD structured data
+    var w=document.createTreeWalker(document.documentElement,NodeFilter.SHOW_TEXT,null),n,list=[];
+    while(n=w.nextNode()){ if(n.nodeValue && (n.nodeValue.indexOf('206-9039')>-1 || n.nodeValue.indexOf(OLD_DIGITS)>-1)) list.push(n); }
+    list.forEach(function(nd){ nd.nodeValue=repl(nd.nodeValue); });
+  }
+  if(document.readyState!=='loading')fix();else document.addEventListener('DOMContentLoaded',fix);
+})();
+
 // Footer legal links (Privacy Policy / Terms) — injected site-wide so every
 // page's footer links to the legal pages without editing each page.
 (function(){
