@@ -61,10 +61,16 @@ font-family:var(--sans);color:var(--ink);background:var(--cream);overflow:hidden
 .woc .btn-o:hover{border-color:var(--gold);background:rgba(194,167,106,.1)}
 .woc .kick{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--goldd);margin-bottom:14px;display:block}
 
-/* HERO — split: readable copy on solid evergreen + contained photo */
-.woc-hero{display:grid;grid-template-columns:1.02fr .98fr;min-height:100vh;min-height:100svh}
-.woc-hero .hero-copy{background:var(--ever);color:var(--cream);display:flex;align-items:center;justify-content:center;padding:120px 6vw 84px;text-align:center}
-.woc-hero .hero-copy-in{max-width:544px;width:100%}
+/* HERO — full-width photo banner over a solid evergreen copy band.
+   The lead photo is wide, so it is shown as a banner (whole scene, faces
+   protected) rather than cropped into a tall column. On phones it drops
+   to its natural aspect so nothing is cropped at all. */
+.woc-hero{display:flex;flex-direction:column}
+.woc-hero .hero-photo{position:relative;order:-1;width:100%;aspect-ratio:3/2;overflow:hidden;background:#0f1c14}
+.woc-hero .hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.woc-hero .hero-photo::after{content:"";position:absolute;top:0;left:0;right:0;height:180px;background:linear-gradient(180deg,rgba(15,28,20,.85),rgba(15,28,20,.2) 60%,transparent);z-index:2}
+.woc-hero .hero-copy{background:var(--ever);color:var(--cream);text-align:center;padding:clamp(50px,6vw,86px) 6vw}
+.woc-hero .hero-copy-in{max-width:600px;width:100%;margin:0 auto}
 .woc-hero .eye{color:var(--gold);display:block}
 .woc-hero .script{color:var(--golds);margin:18px 0 12px}
 .woc-hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(38px,4.2vw,60px);line-height:1.05;letter-spacing:-.01em;color:#fff;margin:0}
@@ -73,14 +79,17 @@ font-family:var(--sans);color:var(--ink);background:var(--cream);overflow:hidden
 .woc-hero .cta{margin-top:34px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 .woc-hero .scarce{margin-top:28px;font-family:var(--sans);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--golds)}
 .woc-hero .scarce b{color:#fff;font-weight:600}
-.woc-hero .hero-photo{position:relative;overflow:hidden;background:#0f1c14}
-.woc-hero .hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 24%}
-.woc-hero .hero-photo::after{content:"";position:absolute;top:0;left:0;right:0;height:170px;background:linear-gradient(180deg,rgba(15,28,20,.8),rgba(15,28,20,.18) 60%,transparent);z-index:2}
 @media(max-width:900px){
-.woc-hero{grid-template-columns:1fr;min-height:auto}
-.woc-hero .hero-photo{min-height:56vh;order:-1}
-.woc-hero .hero-copy{padding:58px 26px 66px}
+.woc-hero .hero-photo{aspect-ratio:auto}
+.woc-hero .hero-photo img{position:static;height:auto;object-fit:contain}
+.woc-hero .hero-photo::after{height:120px}
+.woc-hero .hero-copy{padding:46px 26px 60px}
 }
+
+/* Mid-page featured scene band (relocated original hero photo) */
+.woc-band{padding:0;background:var(--ever);overflow:hidden}
+.woc-band img{display:block;width:100%;height:auto;aspect-ratio:2/1;object-fit:cover;object-position:center 30%}
+@media(max-width:900px){.woc-band img{aspect-ratio:4/3;object-position:center 26%}}
 
 /* JULY OFFER BAR */
 .woc-offerbar{background:var(--cran);color:#fff;padding:18px 24px;text-align:center}
@@ -279,7 +288,7 @@ centering true at every width, not just the text inside the box. ===== */
 <div class="scarce">Only <b>10 sessions</b> &nbsp;&middot;&nbsp; <b>October 24 &amp; 25</b></div>
 </div>
 </div>
-<div class="hero-photo"><img src="woc-hero.jpg" alt="Children gathered around Santa before a glowing Christmas tree, a Blackwater fine art Santa portrait"></div>
+<div class="hero-photo"><img src="woc-whisper.jpg" alt="A young girl in a nightgown whispering to Santa on a styled Christmas set, a Blackwater fine art Santa portrait"></div>
 </header>
 
 <!-- CHRISTMAS IN JULY OFFER BAR (auto-hides after August 7, 2026) -->
@@ -342,6 +351,9 @@ centering true at every width, not just the text inside the box. ===== */
 </div>
 </div>
 </section>
+
+<!-- FEATURED SCENE (relocated original hero) -->
+<section class="woc-band"><img src="woc-hero.jpg" alt="Children gathered around Santa before a glowing Christmas tree at the Blackwater fine art studio" loading="lazy"></section>
 
 <!-- WHAT'S INCLUDED / RESERVE -->
 <section class="woc-split rev wide woc-offer" id="included" style="background:var(--ever2)">
