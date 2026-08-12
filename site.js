@@ -98,9 +98,9 @@
   function addLegal(){
     var fl=document.querySelector('.foot-legal2');
     if(!fl) return;
-    if(fl.querySelector('a[href="privacy.html"]')) return;
+    if(fl.querySelector('a[href="privacy"]')) return;
     var s=document.createElement('span');
-    s.innerHTML='<a href="privacy.html">Privacy Policy</a>&nbsp;&middot;&nbsp;<a href="terms.html">Terms &amp; Conditions</a>';
+    s.innerHTML='<a href="privacy">Privacy Policy</a>&nbsp;&middot;&nbsp;<a href="terms">Terms &amp; Conditions</a>';
     var first=fl.querySelector('span');
     if(first&&first.nextSibling){fl.insertBefore(s,first.nextSibling);}else{fl.appendChild(s);}
   }

@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.blackwaterportraits.com/</loc><priority>1.0</priority></url>
-  <url><loc>https://www.blackwaterportraits.com/about.html</loc><priority>0.8</priority></url>
-  <url><loc>https://www.blackwaterportraits.com/experience.html</loc><priority>0.8</priority></url>
-  <url><loc>https://www.blackwaterportraits.com/family.html</loc><priority>0.9</priority></url>
-  <url><loc>https://www.blackwaterportraits.com/children.html</loc><priority>0.9</priority></url>
-  <url><loc>https://www.blackwaterportraits.com/seniors.html</loc><priority>0.9</priority></url>
-  <url><loc>https://www.blackwaterportraits.com/animals.html</loc><priority>0.9</priority></url>
-  <url><loc>https://www.blackwaterportraits.com/investment.html</loc><priority>0.8</priority></url>
+  <url><loc>https://www.blackwaterportraits.com/about</loc><priority>0.8</priority></url>
+  <url><loc>https://www.blackwaterportraits.com/experience</loc><priority>0.8</priority></url>
+  <url><loc>https://www.blackwaterportraits.com/family</loc><priority>0.9</priority></url>
+  <url><loc>https://www.blackwaterportraits.com/children</loc><priority>0.9</priority></url>
+  <url><loc>https://www.blackwaterportraits.com/seniors</loc><priority>0.9</priority></url>
+  <url><loc>https://www.blackwaterportraits.com/animals</loc><priority>0.9</priority></url>
+  <url><loc>https://www.blackwaterportraits.com/investment</loc><priority>0.8</priority></url>
   <url><loc>https://www.blackwaterportraits.com/what-to-wear</loc><priority>0.6</priority></url>
-  <url><loc>https://www.blackwaterportraits.com/stories.html</loc><priority>0.6</priority></url>
+  <url><loc>https://www.blackwaterportraits.com/stories</loc><priority>0.6</priority></url>
   <url><loc>https://www.blackwaterportraits.com/why-heirloom-artwork</loc><priority>0.7</priority></url>
   <url><loc>https://www.blackwaterportraits.com/designed-for-your-room</loc><priority>0.7</priority></url>
   <url><loc>https://www.blackwaterportraits.com/senior-portraits-ohio-valley-2027</loc><priority>0.8</priority></url>
-  <url><loc>https://www.blackwaterportraits.com/blackwater-grand-opening.html</loc><priority>0.7</priority></url>
+  <url><loc>https://www.blackwaterportraits.com/blackwater-grand-opening</loc><priority>0.7</priority></url>
   <url><loc>https://www.blackwaterportraits.com/fine-art-portraits-vs-photo-session</loc><priority>0.7</priority></url>
-  <url><loc>https://www.blackwaterportraits.com/ppa-30-under-30.html</loc><priority>0.7</priority></url>
-  <url><loc>https://www.blackwaterportraits.com/faq.html</loc><priority>0.6</priority></url>
-  <url><loc>https://www.blackwaterportraits.com/models.html</loc><priority>0.7</priority></url>
-  <url><loc>https://www.blackwaterportraits.com/wonder-of-christmas.html</loc><priority>0.9</priority></url>
-  <url><loc>https://www.blackwaterportraits.com/contact.html</loc><priority>0.8</priority></url>
+  <url><loc>https://www.blackwaterportraits.com/ppa-30-under-30</loc><priority>0.7</priority></url>
+  <url><loc>https://www.blackwaterportraits.com/faq</loc><priority>0.6</priority></url>
+  <url><loc>https://www.blackwaterportraits.com/models</loc><priority>0.7</priority></url>
+  <url><loc>https://www.blackwaterportraits.com/wonder-of-christmas</loc><priority>0.9</priority></url>
+  <url><loc>https://www.blackwaterportraits.com/contact</loc><priority>0.8</priority></url>
 </urlset>
