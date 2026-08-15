@@ -255,10 +255,10 @@ centering true at every width, not just the text inside the box. ===== */
   padding:clamp(104px,14vh,150px) 6vw clamp(52px,8vh,88px);min-height:62vh;
   display:flex;flex-direction:column;justify-content:center}
 .woc .ab-hero .ab-bg{position:absolute;inset:0;z-index:0}
-.woc .ab-hero .ab-bg img{width:100%;height:100%;object-fit:cover;object-position:center 45%}
+.woc .ab-hero .ab-bg img{width:100%;height:100%;object-fit:cover;object-position:center top}
 .woc .ab-hero .ab-bg::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(13,23,16,.62),rgba(13,23,16,.40) 42%,rgba(13,23,16,.85))}
-.woc .ab-hero .ab-in{position:relative;z-index:2;max-width:660px;margin:0 auto}
+  background:radial-gradient(135% 100% at 50% 60%,rgba(11,20,14,.58),rgba(11,20,14,.22) 55%,rgba(11,20,14,.05) 100%),linear-gradient(180deg,rgba(11,20,14,.5),rgba(11,20,14,.4) 38%,rgba(11,20,14,.9))}
+.woc .ab-hero .ab-in{position:relative;z-index:2;max-width:660px;margin:0 auto;text-shadow:0 2px 20px rgba(8,14,10,.6),0 1px 3px rgba(8,14,10,.45)}
 .woc .ab-hero .eye{color:var(--gold);display:block}
 .woc .ab-hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(40px,5.2vw,66px);line-height:1.04;letter-spacing:-.01em;color:#fff;margin:14px 0 0;text-align:center}
 .woc .ab-hero h1 em{font-style:italic;color:var(--golds)}
