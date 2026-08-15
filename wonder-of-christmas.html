@@ -65,29 +65,30 @@ font-family:var(--sans);color:var(--ink);background:var(--cream);overflow:hidden
    The lead photo is wide, so it is shown as a banner (whole scene, faces
    protected) rather than cropped into a tall column. On phones it drops
    to its natural aspect so nothing is cropped at all. */
-.woc-hero{display:flex;flex-direction:column}
-.woc-hero .hero-photo{position:relative;order:-1;width:100%;aspect-ratio:3/2;overflow:hidden;background:#0f1c14}
-.woc-hero .hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
-.woc-hero .hero-photo::after{content:"";position:absolute;top:0;left:0;right:0;height:180px;background:linear-gradient(180deg,rgba(15,28,20,.85),rgba(15,28,20,.2) 60%,transparent);z-index:2}
-.woc-hero .hero-copy{background:var(--ever);color:var(--cream);text-align:center;padding:clamp(50px,6vw,86px) 6vw}
-.woc-hero .hero-copy-in{max-width:600px;width:100%;margin:0 auto}
+.woc-hero{position:relative;overflow:hidden;background:var(--ever);color:var(--cream);text-align:center;padding:clamp(104px,14vh,150px) 6vw clamp(48px,7vh,80px);min-height:62vh;display:flex;flex-direction:column;justify-content:center}
+.woc-hero .hero-bg{position:absolute;inset:0;z-index:0}
+.woc-hero .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 22%}
+.woc-hero .hero-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(135% 100% at 50% 58%,rgba(9,17,12,.6),rgba(9,17,12,.25) 55%,rgba(9,17,12,.08) 100%),linear-gradient(180deg,rgba(9,17,12,.55),rgba(9,17,12,.42) 40%,rgba(9,17,12,.9))}
+.woc-hero .hero-copy-in{position:relative;z-index:2;max-width:620px;width:100%;margin:0 auto;text-shadow:0 2px 20px rgba(6,12,8,.6),0 1px 3px rgba(6,12,8,.45)}
 .woc-hero .eye{color:var(--gold);display:block}
-.woc-hero .script{color:var(--golds);margin:18px 0 12px}
-.woc-hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(38px,4.2vw,60px);line-height:1.05;letter-spacing:-.01em;color:#fff;margin:0}
+.woc-hero .script{color:var(--golds);margin:12px 0 4px}
+.woc-hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(34px,4.2vw,56px);line-height:1.06;letter-spacing:-.01em;color:#fff;margin:6px 0 0}
 .woc-hero h1 em{font-style:italic;color:var(--golds)}
-.woc-hero .sub{font-family:var(--serif);font-style:italic;font-size:clamp(17px,1.55vw,21px);color:rgba(250,244,232,.9);max-width:44ch;margin:22px auto 0;line-height:1.55}
-.woc-hero .cta{margin-top:34px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-.woc-hero .scarce{margin-top:28px;font-family:var(--sans);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--golds)}
+.woc-hero .sub{font-family:var(--serif);font-style:italic;font-size:clamp(16px,1.5vw,20px);color:rgba(250,244,232,.92);max-width:44ch;margin:14px auto 0;line-height:1.5}
+.woc-hero .cta{margin-top:24px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.woc-hero .scarce{margin-top:20px;font-family:var(--sans);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--golds)}
 .woc-hero .scarce b{color:#fff;font-weight:600}
-@media(max-width:900px){
-/* Taller portrait frame on phones. A 4:5 crop of this 5:4 photo keeps the
-   FULL height (every head and both sets of feet stay in frame) and trims
-   only the side props, so Santa and the girl render much larger and are
-   easy to see. */
-.woc-hero .hero-photo{aspect-ratio:4/5}
-.woc-hero .hero-photo img{position:absolute;inset:0;height:100%;object-fit:cover;object-position:44% center}
-.woc-hero .hero-photo::after{height:120px}
-.woc-hero .hero-copy{padding:46px 26px 60px}
+@media(max-width:560px){
+.woc-hero{justify-content:flex-start;min-height:0;padding:clamp(90px,12vh,112px) 22px 36px}
+.woc-hero .cta{flex-direction:column;gap:12px}
+.woc-hero .cta .btn-x,.woc-hero .cta .btn-o{width:100%}
+}
+/* sticky mobile CTA (parity with Autumn at Blackwater) */
+.woc-sticky{display:none}
+@media(max-width:767px){
+.woc-sticky{display:block;position:fixed;left:0;right:0;bottom:0;z-index:150;background:#16271C;border-top:1px solid rgba(194,167,106,.45);padding:9px 14px;box-shadow:0 -8px 24px rgba(0,0,0,.3)}
+.woc-sticky a{display:flex;align-items:center;justify-content:center;min-height:48px;background:#C2A76A;color:#231a12;font-family:'Montserrat',-apple-system,Arial,sans-serif;font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;line-height:1.2;text-align:center}
+footer{padding-bottom:92px}
 }
 
 /* Mid-page featured scene band (relocated original hero photo) */
@@ -278,7 +279,7 @@ centering true at every width, not just the text inside the box. ===== */
 
 <!-- HERO -->
 <header class="woc-hero">
-<div class="hero-copy">
+<div class="hero-bg"><img src="woc-whisper.jpg" alt="A young girl in a nightgown whispering to Santa on a styled Christmas set, a Blackwater fine art Santa portrait"></div>
 <div class="hero-copy-in">
 <span class="eye">A Fine Art Santa Experience</span>
 <div class="script">The Wonder of Christmas</div>
@@ -290,8 +291,6 @@ centering true at every width, not just the text inside the box. ===== */
 </div>
 <div class="scarce">Only <b>10 sessions</b> &nbsp;&middot;&nbsp; <b>October 24 &amp; 25</b></div>
 </div>
-</div>
-<div class="hero-photo"><img src="woc-whisper.jpg" alt="A young girl in a nightgown whispering to Santa on a styled Christmas set, a Blackwater fine art Santa portrait"></div>
 </header>
 
 <!-- CHRISTMAS IN JULY OFFER BAR (auto-hides after August 7, 2026) -->
@@ -485,6 +484,7 @@ centering true at every width, not just the text inside the box. ===== */
 </section>
 
 </main>
+<div class="woc-sticky"><a href="#reserve">Reserve Your Date &middot; Oct 24 and 25</a></div>
 
 <footer>
 <div class="wrap">
