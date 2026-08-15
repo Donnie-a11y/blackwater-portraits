@@ -387,7 +387,7 @@ left to crop. Ratios verified against the real image dimensions.
 p01/p13/p27 1200x1500) except two landscape files marked .wide. */
 .row .media{min-height:0;aspect-ratio:4/5}
 .row .media.wide{aspect-ratio:5/4} /* animals p23, what-to-wear p03 (1500x1200) */
-.row .media img{object-position:center center}
+.row .media img{object-position:center 18%}
 
 /* Category tiles: p17 / p18 / p12 / p21 are all 1500x1200 = 5:4 landscape.
 The old 4:5 portrait frame was cutting 44% off the width. */
@@ -566,3 +566,7 @@ frame; their source files already match it, so nothing is cropped.)
 /* Where a fixed frame is still used (category tiles), bias the crop
    toward the top so a face is never what gets trimmed. */
 .cat img{object-position:center 18%}
+
+/* Dropdown trigger that is also a link (Experience) */
+.nav-drop>a{font-family:var(--sans);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(251,248,241,.82);font-weight:400;cursor:pointer;padding:6px 0;border-bottom:1px solid transparent;transition:.25s}
+.nav-drop:hover>a{color:var(--gold);border-bottom-color:var(--gold)}
