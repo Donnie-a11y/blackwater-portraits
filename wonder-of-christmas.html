@@ -67,7 +67,7 @@ font-family:var(--sans);color:var(--ink);background:var(--cream);overflow:hidden
    to its natural aspect so nothing is cropped at all. */
 .woc-hero{position:relative;overflow:hidden;background:var(--ever);color:var(--cream);text-align:center;padding:clamp(104px,14vh,150px) 6vw clamp(48px,7vh,80px);min-height:62vh;display:flex;flex-direction:column;justify-content:center}
 .woc-hero .hero-bg{position:absolute;inset:0;z-index:0}
-.woc-hero .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 22%}
+.woc-hero .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
 .woc-hero .hero-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(135% 100% at 50% 58%,rgba(9,17,12,.6),rgba(9,17,12,.25) 55%,rgba(9,17,12,.08) 100%),linear-gradient(180deg,rgba(9,17,12,.55),rgba(9,17,12,.42) 40%,rgba(9,17,12,.9))}
 .woc-hero .hero-copy-in{position:relative;z-index:2;max-width:620px;width:100%;margin:0 auto;text-shadow:0 2px 20px rgba(6,12,8,.6),0 1px 3px rgba(6,12,8,.45)}
 .woc-hero .eye{color:var(--gold);display:block}
@@ -95,6 +95,11 @@ footer{padding-bottom:92px}
 .woc-band{padding:0;background:var(--ever);overflow:hidden}
 .woc-band img{display:block;width:100%;height:auto;aspect-ratio:2/1;object-fit:cover;object-position:center 30%}
 @media(max-width:900px){.woc-band img{aspect-ratio:4/3;object-position:center 26%}}
+
+/* MOMENTS DUO — two portrait frames from the set, side by side */
+.woc-duo .din{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:1180px;margin:0 auto;padding:0 40px}
+.woc-duo img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:4/5;border:1px solid rgba(194,167,106,.3)}
+@media(max-width:700px){.woc-duo .din{grid-template-columns:1fr;padding:0 24px}.woc-duo img{aspect-ratio:5/4}}
 
 /* JULY OFFER BAR */
 .woc-offerbar{background:var(--cran);color:#fff;padding:18px 24px;text-align:center}
@@ -279,7 +284,7 @@ centering true at every width, not just the text inside the box. ===== */
 
 <!-- HERO -->
 <header class="woc-hero">
-<div class="hero-bg"><img src="woc-whisper.jpg" alt="A young girl in a nightgown whispering to Santa on a styled Christmas set, a Blackwater fine art Santa portrait"></div>
+<div class="hero-bg"><img src="woc-hero-2026.jpg" onerror="this.onerror=null;this.src='woc-whisper.jpg'" alt="Santa seated with four children around him on a styled Christmas set, a Blackwater fine art Santa portrait"></div>
 <div class="hero-copy-in">
 <span class="eye">A Fine Art Santa Experience</span>
 <div class="script">The Wonder of Christmas</div>
@@ -317,10 +322,10 @@ centering true at every width, not just the text inside the box. ===== */
 </section>
 
 <!-- THE EXPERIENCE -->
-<section class="woc-split" id="experience">
+<section class="woc-split wide" id="experience">
 <div class="wrapx">
 <div class="grid">
-<div class="order-img"><div class="frame"><img src="woc-santa.jpg" alt="Santa cradling a newborn in front of a lit Christmas tree, a Blackwater fine art Santa portrait"></div></div>
+<div class="order-img"><div class="frame"><img src="woc-experience-2026.jpg" onerror="this.onerror=null;this.src='woc-santa.jpg'" alt="A child painting Santa's nose with a paintbrush at the craft table, a candid Blackwater fine art Santa moment"></div></div>
 <div>
 <span class="kick">The Experience</span>
 <h2>Not a line at the mall.<br>A portrait to <em>keep forever</em>.</h2>
@@ -347,7 +352,19 @@ centering true at every width, not just the text inside the box. ===== */
 </section>
 
 <!-- FEATURED SCENE (relocated original hero) -->
-<section class="woc-band"><img src="woc-hero.jpg" alt="Children gathered around Santa before a glowing Christmas tree at the Blackwater fine art studio" loading="lazy"></section>
+<section class="woc-band"><img src="woc-band-2026.jpg" onerror="this.onerror=null;this.src='woc-hero.jpg'" alt="Santa standing with four children before a glowing Christmas tree at the Blackwater fine art studio" loading="lazy"></section>
+
+<!-- MOMENTS DUO -->
+<section class="woc-duo" style="background:var(--ever);padding:clamp(54px,8vw,104px) 0">
+<div class="wrapx center" style="padding-bottom:clamp(30px,4vw,46px)">
+<span class="eye" style="color:var(--gold)">From the Set</span>
+<h2 style="color:#fff;margin-top:12px">Real children. <em>Real wonder.</em></h2>
+</div>
+<div class="din">
+<img src="woc-moment-siblings-2026.jpg" onerror="this.onerror=null;this.src='woc-hero.jpg'" alt="Four siblings in matching pajamas before a decorated Christmas tree, a Blackwater fine art portrait" loading="lazy">
+<img src="woc-moment-sisters-2026.jpg" onerror="this.onerror=null;this.src='woc-family.jpg'" alt="Two sisters in white nightgowns on a red velvet chair by the tree, a Blackwater fine art Christmas portrait" loading="lazy">
+</div>
+</section>
 
 <!-- WHAT'S INCLUDED / RESERVE -->
 <section class="woc-split rev wide woc-offer" id="included" style="background:var(--ever2)">
@@ -359,7 +376,7 @@ centering true at every width, not just the text inside the box. ===== */
 <div class="rulec"></div>
 <p>Your retainer reserves your family's session date and time on our styled Christmas set, and it is credited in full toward the artwork you choose at your reveal. It is never an added fee. The first five families to reserve receive a $250 Heirloom Credit toward their finished artwork.</p>
 </div>
-<div class="order-img"><div class="frame"><img src="woc-family.jpg" alt="A little girl holding a wrapped gift on Santa's lap, a Blackwater fine art Christmas portrait"></div></div>
+<div class="order-img"><div class="frame"><img src="woc-reserve-2026.jpg" onerror="this.onerror=null;this.src='woc-family.jpg'" alt="Two brothers in striped pajamas holding a wrapped gift on the Christmas set, a Blackwater fine art portrait"></div></div>
 </div>
 <div class="woc-invite">
 <div class="inner">
