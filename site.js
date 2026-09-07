@@ -106,3 +106,19 @@
   }
   if(document.readyState!=='loading')addLegal();else document.addEventListener('DOMContentLoaded',addLegal);
 })();
+
+
+/* Text-to-book CTA in footer on every page; keyword matches the page series */
+(function(){try{
+  var map={"wonder-of-christmas":"SANTA","seniors":"SIGNATURE","senior-portraits-ohio-valley-2027":"SIGNATURE","family":"HEIRLOOM","children":"LEGACY","animals":"COMPANION","autumn-at-blackwater":"AUTUMN"};
+  var path=location.pathname.replace(/^\/+|\/+$/g,"").replace(/\.html$/,"");
+  var kw=map[path]||"PORTRAIT";
+  var addr=document.querySelector(".foot-addr");
+  if(addr){
+    var d=document.createElement("div");
+    d.className="foot-textbook";
+    d.style.cssText="margin-top:12px;font-family:var(--sans,sans-serif);font-size:12px;letter-spacing:.06em;line-height:1.6";
+    d.innerHTML="Or text <b>"+kw+"</b> to <a href=\"sms:+17403914921?&amp;body="+kw+"\">(740) 391-4921</a> to book";
+    addr.appendChild(d);
+  }
+}catch(e){}})();
