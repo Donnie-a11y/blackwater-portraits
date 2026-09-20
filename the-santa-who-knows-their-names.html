@@ -7,7 +7,7 @@
 <meta name="description" content="The Wonder of Christmas is a private, hand built Santa experience in Bellaire, Ohio. A real storybook Santa who knows your children before they arrive, and finished heirloom artwork. October 24 and 25.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
 <link rel="icon" href="favicon.ico?v=2" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=2">
@@ -41,27 +41,69 @@
 <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=999634139621338&ev=PageView&noscript=1"/></noscript>
 <!-- End Meta Pixel Code -->
 <style>
-  .post-wrap{max-width:760px;margin:0 auto;padding:0 28px}
-  .post-head{text-align:center;padding:180px 0 20px}
-  .post-cat{font-family:var(--sans);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-deep);font-weight:500}
-  .post-meta{font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mushroom);margin-top:18px}
-  .post-hero{margin:44px auto 10px;max-width:880px}
-  .post-hero img{display:block;width:100%;height:auto}
-  .post-body{padding:20px 28px 40px;text-align:center}
-  .post-body p{font-size:17px;line-height:1.85;color:var(--espresso);margin:0 auto 22px;font-weight:300;max-width:58ch;text-align:center}
-  .post-body h2{font-family:var(--serif);font-weight:500;font-size:clamp(26px,3vw,34px);color:var(--espresso);margin:46px auto 14px;line-height:1.2;text-align:center;max-width:34ch}
-  .post-body h2 em{font-style:italic;color:var(--gold-deep)}
-  .post-body a.inline{color:var(--gold-deep);border-bottom:1px solid var(--gold)}
-  .post-lead{font-family:var(--serif);font-style:italic;font-size:22px;line-height:1.5;color:var(--mocha);margin:0 auto 26px;max-width:50ch;text-align:center}
-  .post-fig{margin:40px auto;max-width:760px}
-  .post-fig img{display:block;width:100%;height:auto}
-  .post-cap{font-family:var(--sans);font-size:11px;letter-spacing:.1em;color:var(--mushroom);text-align:center;margin-top:12px;font-weight:300}
-  .post-faq{max-width:640px;margin:10px auto 0;text-align:left}
-  .post-faq h2{font-family:var(--serif);font-weight:500;font-size:clamp(26px,3vw,34px);color:var(--espresso);text-align:center;margin-bottom:26px}
-  .post-faq .qa{border-top:1px solid var(--line);padding:22px 2px}
-  .post-faq .qa:last-child{border-bottom:1px solid var(--line)}
-  .post-faq .q{font-family:var(--serif);font-weight:600;font-size:20px;color:var(--espresso);margin:0 0 8px}
-  .post-faq .a{font-size:15.5px;line-height:1.7;color:var(--mocha);margin:0;font-weight:300;max-width:60ch}
+/* ===== The Santa Who Knows Their Names — Wonder of Christmas branded story ===== */
+.wstory{--ever:#16271C;--ever2:#1E3327;--cream:#FAF4E8;--cream2:#F3E9D6;--gold:#C2A76A;--goldd:#9A7F45;--golds:#E4D4AC;--ink:#2A2018;--ink2:#5F503F;
+font-family:var(--sans);color:var(--ink);background:var(--cream);overflow:hidden}
+.wstory .wrapx{max-width:820px;margin:0 auto;padding:0 28px}
+.wstory .eye{display:block;font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.34em;text-transform:uppercase;color:var(--goldd);text-align:center}
+.wstory .script{font-family:var(--serif);font-style:italic;font-weight:600;color:var(--gold);line-height:1;font-size:clamp(26px,4.6vw,48px);text-align:center;margin:12px 0 4px}
+.wstory .rulec{width:60px;height:1px;background:var(--gold);margin:16px auto 26px}
+
+/* HERO — evergreen band with gold script, then framed photo */
+.wstory-hero{background:var(--ever);color:var(--cream);text-align:center;padding:clamp(120px,16vh,168px) 6vw clamp(40px,6vw,64px)}
+.wstory-hero .eye{color:var(--gold)}
+.wstory-hero .script{color:var(--golds)}
+.wstory-hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(34px,5vw,58px);line-height:1.07;color:#fff;margin:10px auto 0;max-width:20ch}
+.wstory-hero h1 em{font-style:italic;color:var(--golds)}
+.wstory-hero .meta{font-family:var(--sans);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(228,212,172,.78);margin-top:22px}
+.wstory-hero .heroimg{max-width:900px;margin:clamp(36px,5vw,58px) auto 0;padding:0 28px}
+.wstory-hero .heroimg img{display:block;width:100%;height:auto;border:1px solid rgba(194,167,106,.45);box-shadow:0 40px 90px -50px rgba(0,0,0,.8)}
+
+/* BODY on cream */
+.wstory-body{background:var(--cream);padding:clamp(50px,7vw,86px) 0}
+.wstory-body .wrapx{max-width:660px}
+.wstory-lead{font-family:var(--serif);font-style:italic;font-size:clamp(20px,2.4vw,27px);line-height:1.5;color:var(--ink);text-align:center;max-width:40ch;margin:0 auto 30px}
+.wstory-body p{font-size:17px;line-height:1.85;color:var(--ink2);font-weight:300;max-width:60ch;margin:0 auto 22px;text-align:center}
+.wstory-body h2{font-family:var(--serif);font-weight:500;font-size:clamp(26px,3.2vw,36px);color:var(--ink);text-align:center;margin:46px auto 6px;line-height:1.15;max-width:26ch}
+.wstory-body h2 em{font-style:italic;color:var(--goldd)}
+.wstory-body a.inline{color:var(--goldd);border-bottom:1px solid var(--gold)}
+
+/* FIGURE — framed, gold hairline, gold caps caption */
+.wstory-fig{background:var(--cream);margin:0;padding:clamp(6px,2vw,18px) 0}
+.wstory-fig .in{max-width:940px;margin:0 auto;padding:0 28px}
+.wstory-fig img{display:block;width:100%;height:auto;border:1px solid rgba(194,167,106,.4)}
+.wstory-cap{font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--goldd);text-align:center;margin-top:14px;font-weight:400}
+
+/* DARK pull section (evergreen) */
+.wstory-dark{background:var(--ever);color:var(--cream);text-align:center;padding:clamp(58px,8vw,98px) 0}
+.wstory-dark .wrapx{max-width:640px}
+.wstory-dark .eye{color:var(--gold)}
+.wstory-dark h2{font-family:var(--serif);font-weight:500;font-size:clamp(26px,3.4vw,38px);color:#fff;text-align:center;margin:12px auto 0;line-height:1.15;max-width:24ch}
+.wstory-dark h2 em{font-style:italic;color:var(--golds)}
+.wstory-dark p{font-size:17px;line-height:1.85;color:rgba(250,244,232,.85);font-weight:300;max-width:56ch;margin:22px auto 0;text-align:center}
+
+/* FAQ */
+.wstory-faq{background:var(--cream);padding:clamp(44px,6vw,74px) 0}
+.wstory-faq .wrapx{max-width:680px}
+.wstory-faq h2{font-family:var(--serif);font-weight:500;font-size:clamp(26px,3.2vw,36px);color:var(--ink);text-align:center;margin-bottom:26px}
+.wstory-faq h2 em{font-style:italic;color:var(--goldd)}
+.wstory-faq .wf{border-top:1px solid var(--cream2);padding:22px 2px}
+.wstory-faq .wf:last-child{border-bottom:1px solid var(--cream2)}
+.wstory-faq .q{font-family:var(--serif);font-weight:600;font-size:20px;color:var(--ink);margin:0 0 8px}
+.wstory-faq .a{font-size:15.5px;line-height:1.7;color:var(--ink2);margin:0;font-weight:300;max-width:62ch}
+
+/* CTA band evergreen + gold */
+.wstory-cta{background:var(--ever2);color:var(--cream);text-align:center;padding:clamp(64px,9vw,112px) 0}
+.wstory-cta .eye{color:var(--gold)}
+.wstory-cta h2{font-family:var(--serif);font-weight:500;font-size:clamp(30px,4vw,50px);color:#fff;margin:12px 0 0}
+.wstory-cta h2 em{font-style:italic;color:var(--golds)}
+.wstory-cta p{font-family:var(--serif);font-style:italic;font-size:clamp(18px,2vw,23px);color:rgba(250,244,232,.9);max-width:46ch;margin:16px auto 0;line-height:1.5}
+.wstory-cta .btns{margin-top:30px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.wstory .btn-x{display:inline-block;font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;padding:18px 40px;background:var(--gold);color:#231a12;border:1px solid var(--gold);text-decoration:none;transition:.28s ease}
+.wstory .btn-x:hover{background:var(--golds);border-color:var(--golds)}
+.wstory .btn-o{display:inline-block;font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;padding:18px 40px;background:transparent;color:var(--golds);border:1px solid rgba(228,212,172,.5);text-decoration:none;transition:.28s ease}
+.wstory .btn-o:hover{border-color:var(--golds);background:rgba(228,212,172,.08)}
+@media(max-width:560px){.wstory-cta .btns{flex-direction:column;gap:12px}.wstory .btn-x,.wstory .btn-o{width:100%}}
 </style>
 </head>
 <body>
@@ -94,78 +136,97 @@
   <a href="contact.html" class="btn btn-gold mm-cta mm-link">Begin Your Portrait Experience</a>
 </div>
 
-<article>
-  <header class="post-head">
-    <div class="post-wrap">
-      <div class="post-cat">Wonder of Christmas</div>
-      <h1 style="font-family:var(--serif);font-weight:500;font-size:clamp(34px,5vw,58px);line-height:1.06;color:var(--espresso);margin:16px 0 0">The Santa who knows their <em style="font-style:italic;color:var(--gold-deep)">names</em></h1>
-      <div class="post-meta">Blackwater Fine Art Portraits &middot; Bellaire, Ohio &middot; September 20, 2026</div>
-    </div>
+<article class="wstory">
+
+  <header class="wstory-hero">
+    <span class="eye">A Fine Art Santa Experience</span>
+    <div class="script">The Wonder of Christmas</div>
+    <h1>The Santa who knows their <em>names</em></h1>
+    <div class="meta">Blackwater Fine Art Portraits &middot; Bellaire, Ohio &middot; September 20, 2026</div>
+    <div class="heroimg"><img src="/.netlify/images?url=/FINAL_9889.jpg&amp;w=1600&amp;q=82" alt="Santa seated with four children in front of a decorated tree on the hand built Christmas set at Blackwater in Bellaire, Ohio"></div>
   </header>
 
-  <div class="post-wrap">
-    <div class="post-hero"><img src="/.netlify/images?url=/FINAL_9889.jpg&amp;w=1400&amp;q=82" alt="Santa seated with four children in front of a decorated tree on the hand built Christmas set at Blackwater in Bellaire, Ohio"></div>
-  </div>
+  <section class="wstory-body">
+    <div class="wrapx">
+      <p class="wstory-lead">Most Santa photos are a stranger and a lap. This is not that.</p>
+      <p>The Wonder of Christmas is our fine art Santa experience, and it is built around a simple idea. A child should be recognized, not processed. Everything about the afternoon is arranged so that when your children meet Santa, the moment is real, and we are there to keep it.</p>
 
-  <div class="post-wrap post-body">
-    <p class="post-lead">Most Santa photos are a stranger and a lap. This is not that.</p>
-    <p>The Wonder of Christmas is our fine art Santa experience, and it is built around a simple idea. A child should be recognized, not processed. Everything about the afternoon is arranged so that when your children meet Santa, the moment is real, and we are there to keep it.</p>
+      <h2>He knows their <em>names</em></h2>
+      <div class="rulec"></div>
+      <p>Before your session, we ask a few quiet questions. What each child is hoping for. What they call the dog. Who the family lost this year. Santa reads all of it before you arrive. So when your daughter sits down and he already knows her rabbit by name, the look on her face is not performance. That is the difference between a picture of a child on a lap and a picture of a child who has just been recognized.</p>
 
-    <h2>He knows their <em>names</em></h2>
-    <p>Before your session, we ask a few quiet questions. What each child is hoping for. What they call the dog. Who the family lost this year. Santa reads all of it before you arrive. So when your daughter sits down and he already knows her rabbit by name, the look on her face is not performance. That is the difference between a picture of a child on a lap and a picture of a child who has just been recognized.</p>
+      <h2>The set is built by <em>hand</em></h2>
+      <div class="rulec"></div>
+      <p>None of it is a backdrop, and none of it is generated. The window frame, the tree, the old trunk, the rocking horse, the rug. It goes up in pieces every year, by hand, in our Bellaire studio. Your children can touch all of it. That is why the room feels like somewhere, instead of like a screen behind a chair.</p>
+    </div>
+  </section>
 
-    <h2>The set is built by <em>hand</em></h2>
-    <p>None of it is a backdrop, and none of it is generated. The window frame, the tree, the old trunk, the rocking horse, the rug. It goes up in pieces every year, by hand, in our Bellaire studio. Your children can touch all of it. That is why the room feels like somewhere, instead of like a screen behind a chair.</p>
-  </div>
+  <section class="wstory-fig">
+    <div class="in"><img src="/.netlify/images?url=/FINAL_9917.jpg&amp;w=1200&amp;q=82" alt="A boy and a girl painting a small wooden toy with Santa at the craft table on the Blackwater Christmas set" loading="lazy"><p class="wstory-cap">A real set, a real Santa, and an afternoon no one is rushing.</p></div>
+  </section>
 
-  <div class="post-wrap">
-    <div class="post-fig"><img src="/.netlify/images?url=/FINAL_9917.jpg&amp;w=1200&amp;q=82" alt="A boy and a girl painting a small wooden toy with Santa at the craft table on the Blackwater Christmas set" loading="lazy"><p class="post-cap">A real set, a real Santa, and an afternoon no one is rushing.</p></div>
-  </div>
+  <section class="wstory-dark">
+    <div class="wrapx">
+      <span class="eye">Private, Start to Finish</span>
+      <h2>One family at a <em>time</em></h2>
+      <p>There is no line. No shared time slot. No one waiting behind you. For your session, the studio is yours. Your children set the pace and we follow it, which is the only way a shy child ever warms up to Santa on their own terms. It is also why we photograph only ten families across the two days.</p>
+    </div>
+  </section>
 
-  <div class="post-wrap post-body">
-    <h2>One family at a <em>time</em></h2>
-    <p>There is no line. No shared time slot. No one waiting behind you. For your session, the studio is yours. Your children set the pace and we follow it, which is the only way a shy child ever warms up to Santa on their own terms. It is also why we photograph only ten families across the two days.</p>
+  <section class="wstory-body">
+    <div class="wrapx">
+      <h2>What you take <em>home</em></h2>
+      <div class="rulec"></div>
+      <p>Not a folder of files. Finished, gallery grade wall art, designed for a wall in your home and made to outlast every phone you will ever own. The magic of this Christmas, kept where the family will walk past it every day, for the next forty years.</p>
+    </div>
+  </section>
 
-    <h2>What you take <em>home</em></h2>
-    <p>Not a folder of files. Finished, gallery grade wall art, designed for a wall in your home and made to outlast every phone you will ever own. The magic of this Christmas, kept where the family will walk past it every day, for the next forty years.</p>
-  </div>
+  <section class="wstory-fig">
+    <div class="in"><img src="/.netlify/images?url=/FINAL_9840.jpg&amp;w=1200&amp;q=82" alt="Santa standing with four children before a glowing Christmas tree at the Blackwater studio in the Ohio Valley" loading="lazy"><p class="wstory-cap">Made to hang where the family walks past it every day.</p></div>
+  </section>
 
-  <div class="post-wrap">
-    <div class="post-fig"><img src="/.netlify/images?url=/FINAL_9840.jpg&amp;w=1200&amp;q=82" alt="Santa standing with four children before a glowing Christmas tree at the Blackwater studio in the Ohio Valley" loading="lazy"><p class="post-cap">Made to hang where the family walks past it every day.</p></div>
-  </div>
+  <section class="wstory-body">
+    <div class="wrapx">
+      <h2>Photographed in October, on your wall by <em>Christmas</em></h2>
+      <div class="rulec"></div>
+      <p>Real artwork takes time to design, finish, and frame. Photographing in late October means your portraits are ready and hanging well before the holidays, instead of arriving in the last week of December. That is the whole reason Santa comes in the fall.</p>
 
-  <div class="post-wrap post-body">
-    <h2>Photographed in October, on your wall by <em>Christmas</em></h2>
-    <p>Real artwork takes time to design, finish, and frame. Photographing in late October means your portraits are ready and hanging well before the holidays, instead of arriving in the last week of December. That is the whole reason Santa comes in the fall.</p>
+      <h2>The <em>details</em></h2>
+      <div class="rulec"></div>
+      <p>The <a class="inline" href="wonder-of-christmas.html">Wonder of Christmas</a> is Saturday, October 24 and Sunday, October 25, at our Bellaire studio. Ten families across the two days. A $299 retainer reserves your time and is credited in full toward your artwork, so it is never an added fee. The first five families to reserve receive a $250 Heirloom Credit. You can reserve on the <a class="inline" href="wonder-of-christmas.html">Wonder of Christmas</a> page, text SANTA to (740) 391-4921, or message us on <a class="inline" href="https://www.facebook.com/profile.php?id=61562218768427" target="_blank" rel="noopener">Facebook</a> or <a class="inline" href="https://www.instagram.com/blackwaterportraits_" target="_blank" rel="noopener">Instagram</a>.</p>
+    </div>
+  </section>
 
-    <h2>The <em>details</em></h2>
-    <p>The <a class="inline" href="wonder-of-christmas.html">Wonder of Christmas</a> is Saturday, October 24 and Sunday, October 25, at our Bellaire studio. Ten families across the two days. A $299 retainer reserves your time and is credited in full toward your artwork, so it is never an added fee. The first five families to reserve receive a $250 Heirloom Credit. You can reserve on the <a class="inline" href="wonder-of-christmas.html">Wonder of Christmas</a> page, text SANTA to (740) 391-4921, or message us on <a class="inline" href="https://www.facebook.com/profile.php?id=61562218768427" target="_blank" rel="noopener">Facebook</a> or <a class="inline" href="https://www.instagram.com/blackwaterportraits_" target="_blank" rel="noopener">Instagram</a>.</p>
-
-    <div class="post-faq">
-      <h2>Questions, <em style="font-style:italic;color:var(--gold-deep)">answered</em></h2>
-      <div class="qa">
+  <section class="wstory-faq">
+    <div class="wrapx">
+      <h2>Questions, <em>answered</em></h2>
+      <div class="wf">
         <p class="q">Is this a group session or a mini session?</p>
         <p class="a">Neither. Each family has the studio to themselves. There is no line, no shared time slot, and no one waiting behind you. That is why we only photograph ten families across the two days.</p>
       </div>
-      <div class="qa">
+      <div class="wf">
         <p class="q">Why are the Santa sessions in October?</p>
         <p class="a">Because finished artwork takes time to design, finish, and frame. Photographing in October means your portraits are ready and hanging well before Christmas, instead of arriving in the last week of December.</p>
       </div>
-      <div class="qa">
+      <div class="wf">
         <p class="q">Do you photograph families from outside Bellaire?</p>
         <p class="a">Yes. We create for families across the Ohio Valley, Belmont County, St. Clairsville, Wheeling, Northern West Virginia, and Washington and Canonsburg, Pennsylvania.</p>
       </div>
     </div>
-  </div>
+  </section>
 
-  <section class="dark ctaband reveal" style="margin-top:20px">
-    <div class="wrap">
-      <span class="eyebrow">The Wonder of Christmas</span>
+  <section class="wstory-cta">
+    <div class="wrapx">
+      <span class="eye">The Wonder of Christmas</span>
       <h2>Reserve your family's <em>time</em></h2>
-      <p class="lead">Ten families. Two days. October 24 and 25 at our Bellaire studio, and the calendar fills once it fills.</p>
-      <div class="hero-cta" style="justify-content:center"><a href="wonder-of-christmas.html" class="btn btn-gold">See the Wonder of Christmas</a><a href="tel:7403914921" class="link">Call or Text (740) 391-4921</a></div>
+      <p>Ten families. Two days. October 24 and 25 at our Bellaire studio, and the calendar fills once it fills.</p>
+      <div class="btns">
+        <a href="wonder-of-christmas.html" class="btn-x">See the Wonder of Christmas</a>
+        <a href="sms:+17403914921?&amp;body=SANTA" class="btn-o">Text SANTA to (740) 391-4921</a>
+      </div>
     </div>
   </section>
+
 </article>
 
 <footer>
