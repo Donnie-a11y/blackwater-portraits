@@ -4,7 +4,7 @@ Warm meets Modern - ivory / champagne gold / espresso / mocha
 ============================================================ */
 :root{
 --ivory:#FBF8F1; --cream:#F4EDDF; --sand:#EAE0CC; --greige:#D8CBB4; --taupe:#BCAB8E;
---mushroom:#8C7C68; --mocha:#6E5A48; --espresso:#463A30; --cocoa:#281F18;
+--mushroom:#7A6A57; --mocha:#6E5A48; --espresso:#463A30; --cocoa:#281F18;
 --gold:#C2A76A; --gold-deep:#9A7F45; --gold-soft:#E4D4AC;
 --line:#E7DDCA; --line-2:#F0E8D8; --line-dk:rgba(226,207,163,.16);
 --serif:'Cormorant Garamond',Georgia,serif;
@@ -292,7 +292,7 @@ footer{background:var(--cream);color:var(--mushroom);padding:104px 0 42px;border
 .foot-addr a{color:var(--espresso);transition:.2s}
 .foot-addr a:hover{color:var(--gold-deep)}
 .foot-r{display:grid;grid-template-columns:1fr 1fr;gap:36px;padding-top:6px}
-.foot-r h4{font-family:var(--sans);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:18px;font-weight:500}
+.foot-r h4,.foot-r h3{font-family:var(--sans);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:18px;font-weight:500}
 .foot-r a{display:block;font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--cocoa);padding:7px 0;font-weight:300;transition:.2s}
 .foot-r a:hover{color:var(--gold-deep)}
 .foot-rule{height:1px;background:var(--line);margin:66px 0 26px}
@@ -369,7 +369,7 @@ footer{padding:64px 0 38px}
 .foot-logo-img{height:104px}
 .foot-grid{gap:36px}
 .foot-r{grid-template-columns:1fr;gap:28px}
-.foot-r h4{margin-bottom:14px}
+.foot-r h4,.foot-r h3{margin-bottom:14px}
 .foot-rule{margin:44px 0 24px}
 .foot-legal2{gap:16px;line-height:1.9;text-align:center}
 .foot-legal2 span{display:block;width:100%}
@@ -497,7 +497,7 @@ footer .wrap{max-width:1160px}
 .foot-addr a:hover{color:var(--gold);border-bottom-color:var(--gold)}
 .foot-r{display:contents} /* let the two link groups sit as real grid columns for aligned baselines */
 .foot-r>div{padding-top:6px}
-.foot-r h4{font-family:var(--sans);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;font-weight:600}
+.foot-r h4,.foot-r h3{font-family:var(--sans);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;font-weight:600}
 .foot-r a{display:block;font-family:var(--sans);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(251,248,241,.78);padding:9px 0;font-weight:300;transition:.2s;border-bottom:none}
 .foot-r a:hover{color:var(--gold);padding-left:6px}
 .foot-rule{height:1px;background:var(--line-dk);margin:clamp(40px,5vw,60px) 0 24px}
@@ -521,7 +521,7 @@ footer .wrap{max-width:1160px}
   .foot-logo-img{height:96px;margin-bottom:20px}
   .foot-r>div{padding-top:0}
   .foot-r a{padding:12px 0;font-size:12.5px} /* >=44px tap target */
-  .foot-r h4{margin-bottom:10px}
+  .foot-r h4,.foot-r h3{margin-bottom:10px}
   .foot-rule{margin:36px 0 22px}
   .foot-legal2{flex-direction:column;align-items:flex-start;text-align:left;gap:14px}
   .foot-legal2 span{width:auto}
@@ -570,3 +570,20 @@ frame; their source files already match it, so nothing is cropped.)
 /* Dropdown trigger that is also a link (Experience) */
 .nav-drop>a{font-family:var(--sans);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(251,248,241,.82);font-weight:400;cursor:pointer;padding:6px 0;border-bottom:1px solid transparent;transition:.25s}
 .nav-drop:hover>a{color:var(--gold);border-bottom-color:var(--gold)}
+
+/* Service heroes: the searchable line is the h1 (styled as the eyebrow); the poetic line keeps the h1 look */
+h1.eyebrow,.chero h1.eyebrow{line-height:1.8;font-style:normal;font-size:11px;text-wrap:balance}
+.display-h{font-family:var(--serif);font-weight:500;font-style:normal;line-height:1.02;letter-spacing:-.015em;color:var(--espresso)}
+.display-h em{font-style:italic;font-weight:500;color:var(--gold-deep)}
+.chero .display-h{color:var(--ivory);font-size:clamp(44px,5.6vw,80px)}
+
+/* Keyboard focus: visible gold ring on every interactive element */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
+
+.req{color:var(--gold-deep);margin-left:3px}
+.form-note a,.wform .fn a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+
+.foot-r h3{line-height:1.8}
+.foot-addr a{text-decoration:underline;text-decoration-color:rgba(194,167,106,.6);text-underline-offset:3px}
+@media(min-width:901px){.foot-r a{white-space:nowrap}}

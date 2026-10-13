@@ -1,0 +1,7 @@
+# Retired: expired model call (Oct 2026). File kept so past form submissions stay in Netlify.
+/models                  /404.html   410!
+/models/                 /404.html   410!
+/models.html             /404.html   410!
+# Old senior page now lives at /seniors
+/senior-experience       /seniors    301!
+/senior-experience.html  /seniors    301!

@@ -20,11 +20,22 @@
     document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
   }else{document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});}
   document.querySelectorAll('.faq .q').forEach(function(q){
+    q.setAttribute('aria-expanded',q.parentElement.classList.contains('open')?'true':'false');
     q.addEventListener('click',function(){
       var item=q.parentElement, wasOpen=item.classList.contains('open');
       var scope=item.closest('.faq-wrap')||document;
-      scope.querySelectorAll('.faq').forEach(function(f){f.classList.remove('open');});
-      if(!wasOpen)item.classList.add('open');
+      scope.querySelectorAll('.faq').forEach(function(f){f.classList.remove('open');var b=f.querySelector('.q');if(b)b.setAttribute('aria-expanded','false');});
+      if(!wasOpen){item.classList.add('open');q.setAttribute('aria-expanded','true');}
+    });
+  });
+  // Seasonal page FAQs (.wf) use their own markup; same open/close behaviour
+  document.querySelectorAll('.wf > button').forEach(function(b){
+    b.setAttribute('aria-expanded','false');
+    b.addEventListener('click',function(){
+      var item=b.parentElement, wasOpen=item.classList.contains('open');
+      var scope=item.parentElement||document;
+      scope.querySelectorAll('.wf').forEach(function(f){f.classList.remove('open');var x=f.querySelector(':scope > button');if(x)x.setAttribute('aria-expanded','false');});
+      if(!wasOpen){item.classList.add('open');b.setAttribute('aria-expanded','true');}
     });
   });
   var chips=document.querySelectorAll('.chip[data-filter]');
@@ -41,7 +52,7 @@
     var laz=[].slice.call(document.querySelectorAll('img[loading="lazy"]'));
     laz.forEach(function(i){i.setAttribute('decoding','async');});
     function eager(i){ if(i.getAttribute('loading')==='lazy'){ i.setAttribute('loading','eager'); } }
-    if(window.innerWidth<=900){ laz.forEach(eager); return; }
+    // Phones used to load every image at once, which delayed the hero. Now all sizes load ahead of the scroll instead.
     laz.forEach(function(i){
       var t=i.getBoundingClientRect().top;
       if(t < window.innerHeight*1.4){ eager(i); }
