@@ -1,0 +1,11 @@
+/*.jpg
+  Cache-Control: public, max-age=2592000
+
+/*.jpeg
+  Cache-Control: public, max-age=2592000
+
+/*.png
+  Cache-Control: public, max-age=2592000
+
+/.netlify/images
+  Cache-Control: public, max-age=2592000
