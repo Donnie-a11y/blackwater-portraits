@@ -2,18 +2,12 @@
 Blackwater Fine Art Portraits - shared design system
 Warm meets Modern - ivory / champagne gold / espresso / mocha
 ============================================================ */
-/* Editorial serif: Libre Caslon Display (self-hosted, OFL).
-   Display has one upright weight, so italics use the Libre Caslon Text italic
-   and heavier weights use Libre Caslon Text bold. No faux italic or bold. */
-@font-face{font-family:'Blackwater Serif';src:url('/fonts/libre-caslon-display-latin-400-normal.woff2') format('woff2');font-style:normal;font-weight:100 550;font-display:swap;size-adjust:100%}
-@font-face{font-family:'Blackwater Serif';src:url('/fonts/libre-caslon-text-latin-700-normal.woff2') format('woff2');font-style:normal;font-weight:551 900;font-display:swap;size-adjust:82%}
-@font-face{font-family:'Blackwater Serif';src:url('/fonts/libre-caslon-text-latin-400-italic.woff2') format('woff2');font-style:italic;font-weight:100 900;font-display:swap;size-adjust:80%}
 :root{
 --ivory:#FBF8F1; --cream:#F4EDDF; --sand:#EAE0CC; --greige:#D8CBB4; --taupe:#BCAB8E;
 --mushroom:#8C7C68; --mocha:#6E5A48; --espresso:#463A30; --cocoa:#281F18;
 --gold:#C2A76A; --gold-deep:#9A7F45; --gold-soft:#E4D4AC;
 --line:#E7DDCA; --line-2:#F0E8D8; --line-dk:rgba(226,207,163,.16);
---serif:'Blackwater Serif',Georgia,serif;
+--serif:'Cormorant Garamond',Georgia,serif;
 --sans:'Montserrat',-apple-system,Helvetica,Arial,sans-serif;
 --maxw:1240px;
 --shadow:0 40px 90px -50px rgba(40,31,24,.6);
