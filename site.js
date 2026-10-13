@@ -3,7 +3,8 @@
   var nav=document.getElementById('topnav');
   if(nav){
     var solidAt=nav.getAttribute('data-solid-at')==='top'?60:(window.innerHeight*0.72);
-    var onScroll=function(){nav.classList.toggle('solid',window.scrollY>solidAt);};
+    var alwaysSolid=nav.classList.contains('solid'); // light-background pages ship a solid nav; never strip it at the top
+    var onScroll=function(){nav.classList.toggle('solid',alwaysSolid||window.scrollY>solidAt);};
     window.addEventListener('scroll',onScroll,{passive:true});onScroll();
   }
   var mm=document.getElementById('mobileMenu');
