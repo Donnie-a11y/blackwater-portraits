@@ -4,8 +4,8 @@ Warm meets Modern - ivory / champagne gold / espresso / mocha
 ============================================================ */
 :root{
 --ivory:#FBF8F1; --cream:#F4EDDF; --sand:#EAE0CC; --greige:#D8CBB4; --taupe:#BCAB8E;
---mushroom:#7A6A57; --mocha:#6E5A48; --espresso:#463A30; --cocoa:#281F18;
---gold:#C2A76A; --gold-deep:#9A7F45; --gold-soft:#E4D4AC;
+--mushroom:#6B5C4A; --mocha:#6E5A48; --espresso:#463A30; --cocoa:#281F18;
+--gold:#C2A76A; --gold-deep:#7A6230; --gold-soft:#E4D4AC;
 --line:#E7DDCA; --line-2:#F0E8D8; --line-dk:rgba(226,207,163,.16);
 --serif:'Cormorant Garamond',Georgia,serif;
 --sans:'Montserrat',-apple-system,Helvetica,Arial,sans-serif;
@@ -281,7 +281,7 @@ ul.clean li::before{content:"";position:absolute;left:0;top:12px;width:16px;heig
 .ctaband h2{max-width:20ch;margin:0 auto 20px}
 .ctaband .lead{max-width:52ch;margin:0 auto 20px}
 .ctaband .avail{font-family:var(--sans);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:34px}
-.ctaband .studio-addr{font-family:var(--sans);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,248,241,.5);margin-top:30px;font-weight:300;line-height:2}
+.ctaband .studio-addr{font-family:var(--sans);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,248,241,.72);margin-top:30px;font-weight:300;line-height:2}
 
 /* footer - editorial, asymmetric, warm */
 footer{background:var(--cream);color:var(--mushroom);padding:104px 0 42px;border-top:1px solid var(--line)}
@@ -587,3 +587,19 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .foot-r h3{line-height:1.8}
 .foot-addr a{text-decoration:underline;text-decoration-color:rgba(194,167,106,.6);text-underline-offset:3px}
 @media(min-width:901px){.foot-r a{white-space:nowrap}}
+
+/* ===== Accessibility (WCAG 2.1 AA), Oct 2026 ===== */
+.skip-link{position:absolute;left:16px;top:-80px;z-index:3000;background:#281F18;color:#FBF8F1;font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.08em;padding:12px 18px;text-decoration:underline;text-underline-offset:3px}
+.skip-link:focus{top:16px;outline:2px solid #C2A76A;outline-offset:2px}
+#main:focus{outline:none}
+/* Small gold numbers and labels on light backgrounds use the deeper gold; dark sections keep the brand gold */
+.jstep .jn,.card .pn,.pillar .pn{color:var(--gold-deep)}
+.dark .jstep .jn,.deep .jstep .jn,.dark .card .pn,.deep .card .pn,.dark .pillar .pn,.deep .pillar .pn{color:var(--gold)}
+.dark .quote .who,.deep .quote .who,.quote .who{color:var(--gold)}
+.alt .quote .who,.pos .quote .who{color:var(--gold-deep)}
+/* Phone and email links inside text are underlined, not colour only */
+.studio-line a[href^="tel:"],.studio-line a[href^="mailto:"],.fn a[href^="tel:"],.fn a[href^="mailto:"],p a[href^="tel:"],p a[href^="mailto:"]{text-decoration:underline;text-underline-offset:3px}
+.cookie-table{overflow-x:auto;margin:6px 0 22px}
+.cookie-table table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+.cookie-table th,.cookie-table td{border-bottom:1px solid var(--line);text-align:left;padding:10px 12px;vertical-align:top}
+.cookie-table th{font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--espresso);font-weight:600}
