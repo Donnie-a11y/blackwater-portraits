@@ -1,4 +1,4 @@
-// Blackwater Fine Art Portraits - shared behaviour
+// Blackwater Portraits - shared behaviour
 (function(){
   var nav=document.getElementById('topnav');
   if(nav){
