@@ -122,7 +122,7 @@
 
 /* Text-to-book CTA in footer on every page; keyword matches the page series */
 (function(){try{
-  var map={"wonder-of-christmas":"SANTA","seniors":"SIGNATURE","senior-portraits-ohio-valley-2027":"SIGNATURE","family":"HEIRLOOM","children":"LEGACY","animals":"COMPANION","autumn-at-blackwater":"AUTUMN","the-santa-who-knows-their-names":"SANTA"};
+  var map={"seniors":"SIGNATURE","senior-portraits-ohio-valley-2027":"SIGNATURE","family":"HEIRLOOM","children":"LEGACY","animals":"COMPANION"};
   var path=location.pathname.replace(/^\/+|\/+$/g,"").replace(/\.html$/,"");
   var kw=map[path]||"PORTRAIT";
   var addr=document.querySelector(".foot-addr");
