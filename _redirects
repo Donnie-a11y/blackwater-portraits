@@ -5,3 +5,12 @@
 # Old senior page now lives at /seniors
 /senior-experience       /seniors    301!
 /senior-experience.html  /seniors    301!
+# Retired: Wonder of Christmas Santa (Oct 2026)
+/wonder-of-christmas                  /family    301!
+/wonder-of-christmas/                 /family    301!
+/wonder-of-christmas.html             /family    301!
+/wonder-of-christmas-thank-you        /family    301!
+/wonder-of-christmas-thank-you.html   /family    301!
+/the-santa-who-knows-their-names      /stories   301!
+/the-santa-who-knows-their-names/     /stories   301!
+/the-santa-who-knows-their-names.html /stories   301!
