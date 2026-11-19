@@ -61,8 +61,10 @@
     document.querySelectorAll('.ab-sticky,.woc-sticky').forEach(function(el){ el.style.bottom = h ? h+'px' : ''; });
   }
 
+  var styled=false;
+  function addStyles(){ if(styled) return; styled=true; var st=document.createElement('style'); st.textContent=CSS; document.head.appendChild(st); }
   function build(){
-    var st=document.createElement('style'); st.textContent=CSS; document.head.appendChild(st);
+    addStyles();
     banner=document.createElement('div');
     banner.className='bw-cb'; banner.hidden=true;
     banner.setAttribute('role','region'); banner.setAttribute('aria-label','Cookie choices');
@@ -103,6 +105,7 @@
   }
 
   function init(){
+    addStyles();
     var c=getChoice();
     if (c==='accepted' && !GPC) loadTrackers();
     else if (c || GPC) purge();

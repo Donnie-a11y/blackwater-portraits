@@ -373,7 +373,7 @@ footer{padding:64px 0 38px}
 .foot-rule{margin:44px 0 24px}
 .foot-legal2{gap:16px;line-height:1.9;text-align:center}
 .foot-legal2 span{display:block;width:100%}
-.creds-in{font-size:9px;letter-spacing:.16em;gap:10px}
+.creds-in{font-size:10.5px;letter-spacing:.16em;gap:8px 12px;padding:20px 20px}
 }
 
 /* ============================================================
@@ -513,18 +513,22 @@ footer .wrap{max-width:1160px}
   .foot-tag{max-width:30ch}
 }
 
-/* Footer — phone: one clean column, generous tap targets, aligned base row */
+/* Footer, phone: compact. Brand and contact first, the two link groups side by side, one tidy base row */
 @media(max-width:600px){
-  footer{padding:56px 0 34px}
-  .foot-grid{grid-template-columns:1fr;gap:34px}
-  .foot-l{grid-column:auto}
-  .foot-logo-img{height:96px;margin-bottom:20px}
+  footer{padding:44px 0 30px}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:30px 24px}
+  .foot-l{grid-column:1 / -1}
+  .foot-logo-img{height:72px;margin-bottom:14px}
+  .foot-tag{font-size:19px;margin-bottom:14px;max-width:26ch}
+  .foot-addr{font-size:13.5px;line-height:1.95}
   .foot-r>div{padding-top:0}
-  .foot-r a{padding:12px 0;font-size:12.5px} /* >=44px tap target */
-  .foot-r h4,.foot-r h3{margin-bottom:10px}
-  .foot-rule{margin:36px 0 22px}
-  .foot-legal2{flex-direction:column;align-items:flex-start;text-align:left;gap:14px}
+  .foot-r a{padding:11px 0;font-size:11.5px;letter-spacing:.1em;line-height:1.35}
+  .foot-r h4,.foot-r h3{margin-bottom:6px}
+  .foot-rule{margin:26px 0 18px}
+  .foot-area{font-size:11.5px;line-height:1.75;margin-bottom:16px}
+  .foot-legal2{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;font-size:10px;line-height:1.6}
   .foot-legal2 span{width:auto}
+  .foot-legal2 a,.foot-legal2 .cookie-settings{display:inline-block;padding:8px 0}
 }
 
 /* ============================================================

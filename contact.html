@@ -49,7 +49,7 @@
   <div class="nav-in">
     <a href="/" class="nav-logo" aria-label="Blackwater Portraits home"><img src="logo-360.png" alt="Blackwater Portraits" width="360" height="360"></a>
     <div class="nav-links">
-<div class="nav-drop"><span>Portraits</span><div class="menu"><a href="family">Family</a><a href="children">Children</a><a href="seniors">Seniors</a><a href="animals">Animals</a></div></div>
+<div class="nav-drop"><span>Portraits</span><div class="menu"><a href="family">Family</a><a href="children">Children</a><a href="seniors">Seniors</a><a href="animals">Animals</a><a href="horse-portraits">Horses</a></div></div>
 <div class="nav-drop"><a href="experience">Experience</a><div class="menu"><a href="what-to-wear">What to Wear</a><a href="autumn-at-blackwater">Autumn at Blackwater</a><a href="stories">Stories</a></div></div>
 <a href="investment">Investment</a>
 <a href="about">About</a>
@@ -61,7 +61,7 @@
 <div class="mobile-menu" id="mobileMenu">
   <div class="mm-head"><img src="logo-360.png" alt="Blackwater" width="360" height="360"><button class="mm-close" id="mmClose" aria-label="Close menu">&times;</button></div>
   <a href="/" class="mm-link">Home</a>
-  <a href="family" class="sub mm-link">Family</a><a href="children" class="sub mm-link">Children</a><a href="seniors" class="sub mm-link">Seniors</a><a href="animals" class="sub mm-link">Animals</a>
+  <a href="family" class="sub mm-link">Family</a><a href="children" class="sub mm-link">Children</a><a href="seniors" class="sub mm-link">Seniors</a><a href="animals" class="sub mm-link">Animals</a><a href="horse-portraits" class="sub mm-link">Horses</a>
   <a href="experience" class="mm-link">Experience</a>
 <a href="what-to-wear" class="sub mm-link">What to Wear</a>
 <a href="autumn-at-blackwater" class="sub mm-link">Autumn at Blackwater</a>
@@ -104,6 +104,7 @@
 
       <form class="form-card light" name="inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you" aria-label="Portrait inquiry form">
         <input type="hidden" name="form-name" value="inquiry">
+        <input type="hidden" name="source" id="lead-source" value="">
         <p hidden aria-hidden="true" style="display:none !important;position:absolute;left:-9999px;height:0;overflow:hidden"><label>Do not fill this out: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
         <div class="row2">
           <div class="fg"><label for="fn">First Name<span class="req" aria-hidden="true">*</span></label><input id="fn" name="fn" type="text" placeholder="First" autocomplete="given-name" required></div>
@@ -115,10 +116,12 @@
         </div>
         <div class="fg"><label for="pt">Portrait Type</label>
           <select id="pt" name="pt">
+            <option value="">Choose one</option>
             <option>Family Portraits</option>
             <option>Children's Portraits</option>
             <option>High School Seniors</option>
             <option>Animal Portraits</option>
+            <option>Horse Portraits</option>
             <option>Not sure yet</option>
           </select>
         </div>
@@ -173,6 +176,7 @@
 <a href="children">Children</a>
 <a href="seniors">Seniors</a>
 <a href="animals">Animals</a>
+<a href="horse-portraits">Horses</a>
 <a href="contact">Begin Your Portrait Experience</a>
 </div>
 </div>
@@ -187,6 +191,19 @@
     </div>
   </div>
 </footer>
+<script>
+(function(){
+  var f=document.querySelector('form[name="inquiry"]'); if(!f) return;
+  var q=new URLSearchParams(location.search), types={horse:'Horse Portraits',family:'Family Portraits',children:"Children's Portraits",seniors:'High School Seniors',animals:'Animal Portraits'};
+  var t=types[q.get('type')]; var sel=document.getElementById('pt');
+  if(t&&sel){for(var i=0;i<sel.options.length;i++){if(sel.options[i].text===t){sel.selectedIndex=i;break;}}}
+  var src=q.get('type')||'';
+  try{ if(!src&&document.referrer){var r=new URL(document.referrer); if(r.host===location.host) src=r.pathname.replace(/^\/|\.html$/g,'')||'home';} }catch(e){}
+  src=(src||'direct').slice(0,60);
+  document.getElementById('lead-source').value=src;
+  f.setAttribute('action','/thank-you?from='+encodeURIComponent(src));
+})();
+</script>
 <script src="site.js"></script>
 </body>
 </html>

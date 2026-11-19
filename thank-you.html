@@ -16,7 +16,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
 <meta name="theme-color" content="#281F18">
 <!-- Google Analytics (GA4) -->
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-15W37TRF25');gtag('event','generate_lead');</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-15W37TRF25');gtag('event','generate_lead',{lead_source:(new URLSearchParams(location.search).get('from')||'unknown')});</script>
 <!-- Meta Pixel Code -->
 <script>!function(f){if(f.fbq)return;var n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window);fbq('init','999634139621338');fbq('track','PageView');fbq('track','Lead');</script>
 <!-- End Meta Pixel Code -->
@@ -29,7 +29,7 @@
   <div class="nav-in">
     <a href="/" class="nav-logo" aria-label="Blackwater Portraits home"><img src="logo-360.png" alt="Blackwater Portraits" width="360" height="360"></a>
     <div class="nav-links">
-<div class="nav-drop"><span>Portraits</span><div class="menu"><a href="family">Family</a><a href="children">Children</a><a href="seniors">Seniors</a><a href="animals">Animals</a></div></div>
+<div class="nav-drop"><span>Portraits</span><div class="menu"><a href="family">Family</a><a href="children">Children</a><a href="seniors">Seniors</a><a href="animals">Animals</a><a href="horse-portraits">Horses</a></div></div>
 <div class="nav-drop"><a href="experience">Experience</a><div class="menu"><a href="what-to-wear">What to Wear</a><a href="autumn-at-blackwater">Autumn at Blackwater</a><a href="stories">Stories</a></div></div>
 <a href="investment">Investment</a>
 <a href="about">About</a>
@@ -41,7 +41,7 @@
 <div class="mobile-menu" id="mobileMenu">
   <div class="mm-head"><img src="logo-360.png" alt="Blackwater" width="360" height="360"><button class="mm-close" id="mmClose" aria-label="Close menu">&times;</button></div>
   <a href="/" class="mm-link">Home</a>
-  <a href="family" class="sub mm-link">Family</a><a href="children" class="sub mm-link">Children</a><a href="seniors" class="sub mm-link">Seniors</a><a href="animals" class="sub mm-link">Animals</a>
+  <a href="family" class="sub mm-link">Family</a><a href="children" class="sub mm-link">Children</a><a href="seniors" class="sub mm-link">Seniors</a><a href="animals" class="sub mm-link">Animals</a><a href="horse-portraits" class="sub mm-link">Horses</a>
   <a href="experience" class="mm-link">Experience</a>
 <a href="what-to-wear" class="sub mm-link">What to Wear</a>
 <a href="autumn-at-blackwater" class="sub mm-link">Autumn at Blackwater</a>
@@ -106,6 +106,7 @@
 <a href="children">Children</a>
 <a href="seniors">Seniors</a>
 <a href="animals">Animals</a>
+<a href="horse-portraits">Horses</a>
 <a href="contact">Begin Your Portrait Experience</a>
 </div>
 </div>
