@@ -74,6 +74,8 @@ p{font-size:15.5px;color:var(--espresso);max-width:62ch;margin-bottom:18px;font-
 .nav-right{display:flex;align-items:center;gap:28px}
 .nav-phone{font-family:var(--sans);font-size:11px;letter-spacing:.12em;color:rgba(251,248,241,.7);font-weight:300}
 .nav-cta{padding:12px 28px;font-size:10px}
+a.nav-phone{text-decoration:none}
+a.nav-phone:hover{color:var(--gold)}
 .nav-cta-link{font-family:var(--sans);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,248,241,.92);font-weight:400;border-bottom:1px solid var(--gold);padding-bottom:5px;transition:.25s ease;white-space:nowrap}
 .nav-cta-link:hover{color:var(--gold);letter-spacing:.3em}
 .series-tag{font-family:var(--sans);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-top:24px;font-weight:500}
@@ -607,3 +609,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .cookie-table table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
 .cookie-table th,.cookie-table td{border-bottom:1px solid var(--line);text-align:left;padding:10px 12px;vertical-align:top}
 .cookie-table th{font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--espresso);font-weight:600}
+
+.mobile-menu a.mm-phone{display:block;font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;text-align:center;color:rgba(251,248,241,.85);border:0;padding:20px 0 6px;margin:0;text-decoration:none}
+.mobile-menu a.mm-phone:hover,.mobile-menu a.mm-phone:focus{color:var(--gold)}

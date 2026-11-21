@@ -55,7 +55,7 @@
 <a href="about">About</a>
 <a href="faq">FAQ</a>
 </div>
-<div class="nav-right"><span class="nav-phone">(740) 391-4921</span><a href="contact" class="nav-cta-link">Begin Your Portrait Experience</a><button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button></div>
+<div class="nav-right"><a class="nav-phone" href="tel:7403914921">(740) 391-4921</a><a href="contact" class="nav-cta-link">Begin Your Portrait Experience</a><button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button></div>
   </div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
@@ -69,6 +69,7 @@
   <a href="about" class="mm-link">About</a>
   <a href="faq" class="mm-link">FAQ</a>
   <a href="contact" class="btn btn-gold mm-cta mm-link">Begin Your Portrait Experience</a>
+  <a class="mm-phone mm-link" href="tel:7403914921">Call or Text (740) 391-4921</a>
 </div>
 
 <main id="main" tabindex="-1">
@@ -219,6 +220,14 @@
   src=(src||'direct').slice(0,60);
   document.getElementById('lead-source').value=src;
   f.setAttribute('action','/thank-you?from='+encodeURIComponent(src));
+  f.addEventListener('submit',function(){
+    try{
+      var p=new URLSearchParams({from:src});
+      var t=document.getElementById('pt'); if(t&&t.value) p.set('type',t.value.slice(0,40));
+      var cp=document.getElementById('utm-campaign'); if(cp&&cp.value) p.set('campaign',cp.value.slice(0,80));
+      f.setAttribute('action','/thank-you?'+p.toString());
+    }catch(e){}
+  });
 })();
 </script>
 <script src="site.js"></script>
