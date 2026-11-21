@@ -104,6 +104,10 @@
       <form class="form-card light" name="inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you" aria-label="Portrait inquiry form">
         <input type="hidden" name="form-name" value="inquiry">
         <input type="hidden" name="source" id="lead-source" value="">
+        <input type="hidden" name="utm_source" id="utm-source" value="">
+        <input type="hidden" name="utm_medium" id="utm-medium" value="">
+        <input type="hidden" name="utm_campaign" id="utm-campaign" value="">
+        <input type="hidden" name="landing_page" id="landing-page" value="">
         <p hidden aria-hidden="true" style="display:none !important;position:absolute;left:-9999px;height:0;overflow:hidden"><label>Do not fill this out: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
         <div class="row2">
           <div class="fg"><label for="fn">First Name<span class="req" aria-hidden="true">*</span></label><input id="fn" name="fn" type="text" placeholder="First" autocomplete="given-name" required></div>
@@ -132,6 +136,20 @@
             <option>Within the next month</option>
             <option>In the next few months</option>
             <option>Just exploring for now</option>
+          </select>
+        </div>
+        <div class="fg"><label for="heard">How did you hear about Blackwater?</label>
+          <select id="heard" name="heard">
+            <option value="">Choose one</option>
+            <option>Google search</option>
+            <option>Google Maps</option>
+            <option>Facebook</option>
+            <option>Instagram</option>
+            <option>A friend or family member</option>
+            <option>I am a past client</option>
+            <option>Saw a portrait in someone's home</option>
+            <option>A local event or business</option>
+            <option>Other</option>
           </select>
         </div>
         <div class="fg"><label for="msg">Message</label><textarea id="msg" name="msg" rows="4" placeholder="Tell us a little about what you have in mind."></textarea></div>
@@ -200,6 +218,10 @@
   try{ if(!src&&document.referrer){var r=new URL(document.referrer); if(r.host===location.host) src=r.pathname.replace(/^\/|\.html$/g,'')||'home';} }catch(e){}
   src=(src||'direct').slice(0,60);
   document.getElementById('lead-source').value=src;
+  try{ var c=JSON.parse(sessionStorage.getItem('bw_campaign')||'{}');
+    ['utm_source','utm_medium','utm_campaign'].forEach(function(k){var v=q.get(k)||c[k]||''; var el=document.getElementById(k.replace('_','-')); if(el) el.value=String(v).slice(0,80);});
+    var lp=document.getElementById('landing-page'); if(lp) lp.value=String(c.landing||'').slice(0,80);
+  }catch(e){}
   f.setAttribute('action','/thank-you?from='+encodeURIComponent(src));
 })();
 </script>

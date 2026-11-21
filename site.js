@@ -134,3 +134,16 @@
     addr.appendChild(d);
   }
 }catch(e){}})();
+
+// Campaign capture for inquiry attribution. Stored only for this browser tab
+// session, and only after the visitor has accepted cookies (see consent.js).
+(function(){
+  try{
+    if(!/(?:^|;\s*)bw_consent=accepted/.test(document.cookie)) return;
+    var q=new URLSearchParams(location.search), keys=['utm_source','utm_medium','utm_campaign'], hit={}, any=false;
+    keys.forEach(function(k){var v=q.get(k); if(v){hit[k]=v.slice(0,80); any=true;}});
+    if(q.get('gclid')&&!hit.utm_source){hit.utm_source='google';hit.utm_medium='cpc';any=true;}
+    if(q.get('fbclid')&&!hit.utm_source){hit.utm_source='facebook';any=true;}
+    if(any){hit.landing=location.pathname.slice(0,80); sessionStorage.setItem('bw_campaign',JSON.stringify(hit));}
+  }catch(e){}
+})();
