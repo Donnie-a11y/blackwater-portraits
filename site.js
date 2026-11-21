@@ -139,6 +139,7 @@
 // session, and only after the visitor has accepted cookies (see consent.js).
 (function(){
   try{
+    if(navigator.globalPrivacyControl===true) return;
     if(!/(?:^|;\s*)bw_consent=accepted/.test(document.cookie)) return;
     var q=new URLSearchParams(location.search), keys=['utm_source','utm_medium','utm_campaign'], hit={}, any=false;
     keys.forEach(function(k){var v=q.get(k); if(v){hit[k]=v.slice(0,80); any=true;}});
