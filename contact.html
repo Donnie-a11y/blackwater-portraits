@@ -154,7 +154,7 @@
         </div>
         <div class="fg"><label for="msg">Message</label><textarea id="msg" name="msg" rows="4" placeholder="Tell us a little about what you have in mind."></textarea></div>
         <button type="submit" class="btn btn-gold">Send Inquiry</button>
-        <p class="form-note">Fields marked * are required. We reply personally, usually within two business days. Your details are used only to reply to you and plan your portraits. <a href="privacy">Privacy Policy</a>.</p>
+        <p class="form-note">Fields marked * are required. We reply personally, usually within two business days. Your details are used only to reply to you, plan your portraits, and understand how you found us. <a href="privacy">Privacy Policy</a>.</p>
       </form>
     </div>
   </div>
@@ -218,10 +218,6 @@
   try{ if(!src&&document.referrer){var r=new URL(document.referrer); if(r.host===location.host) src=r.pathname.replace(/^\/|\.html$/g,'')||'home';} }catch(e){}
   src=(src||'direct').slice(0,60);
   document.getElementById('lead-source').value=src;
-  try{ var c=JSON.parse(sessionStorage.getItem('bw_campaign')||'{}');
-    ['utm_source','utm_medium','utm_campaign'].forEach(function(k){var v=q.get(k)||c[k]||''; var el=document.getElementById(k.replace('_','-')); if(el) el.value=String(v).slice(0,80);});
-    var lp=document.getElementById('landing-page'); if(lp) lp.value=String(c.landing||'').slice(0,80);
-  }catch(e){}
   f.setAttribute('action','/thank-you?from='+encodeURIComponent(src));
 })();
 </script>

@@ -135,16 +135,34 @@
   }
 }catch(e){}})();
 
-// Campaign capture for inquiry attribution. Stored only for this browser tab
-// session, and only after the visitor has accepted cookies (see consent.js).
+// Campaign capture for inquiry attribution. Runs only when the visitor has accepted
+// cookies and Global Privacy Control is off. Kept in sessionStorage for this tab only.
+// consent.js calls bwCaptureCampaign() on Accept and bwClearCampaign() on Decline.
 (function(){
-  try{
-    if(navigator.globalPrivacyControl===true) return;
-    if(!/(?:^|;\s*)bw_consent=accepted/.test(document.cookie)) return;
-    var q=new URLSearchParams(location.search), keys=['utm_source','utm_medium','utm_campaign'], hit={}, any=false;
-    keys.forEach(function(k){var v=q.get(k); if(v){hit[k]=v.slice(0,80); any=true;}});
-    if(q.get('gclid')&&!hit.utm_source){hit.utm_source='google';hit.utm_medium='cpc';any=true;}
-    if(q.get('fbclid')&&!hit.utm_source){hit.utm_source='facebook';any=true;}
-    if(any){hit.landing=location.pathname.slice(0,80); sessionStorage.setItem('bw_campaign',JSON.stringify(hit));}
-  }catch(e){}
+  var KEYS=['utm_source','utm_medium','utm_campaign'];
+  function allowed(){
+    return navigator.globalPrivacyControl!==true && /(?:^|;\s*)bw_consent=accepted/.test(document.cookie);
+  }
+  function fill(rec){
+    KEYS.forEach(function(k){var el=document.getElementById(k.replace('_','-')); if(el) el.value=rec[k]||'';});
+    var lp=document.getElementById('landing-page'); if(lp) lp.value=rec.landing||'';
+  }
+  window.bwClearCampaign=function(){
+    try{ sessionStorage.removeItem('bw_campaign'); }catch(e){}
+    fill({});
+  };
+  window.bwCaptureCampaign=function(){
+    try{
+      if(!allowed()){ window.bwClearCampaign(); return; }
+      var q=new URLSearchParams(location.search), hit={}, any=false;
+      KEYS.forEach(function(k){var v=q.get(k); if(v){hit[k]=v.slice(0,80); any=true;}});
+      if(!any&&q.get('gclid')){hit.utm_source='google';hit.utm_medium='cpc';any=true;}
+      if(!any&&q.get('fbclid')){hit.utm_source='facebook';any=true;}
+      var rec;
+      if(any){ hit.landing=location.pathname.slice(0,80); sessionStorage.setItem('bw_campaign',JSON.stringify(hit)); rec=hit; }
+      else { rec=JSON.parse(sessionStorage.getItem('bw_campaign')||'{}'); }
+      fill(rec);
+    }catch(e){}
+  };
+  window.bwCaptureCampaign();
 })();

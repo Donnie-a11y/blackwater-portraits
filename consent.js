@@ -96,9 +96,10 @@
   }
   function choose(v){
     setChoice(v); hide();
-    if (v==='accepted') { loadTrackers(); }
+    if (v==='accepted') { loadTrackers(); if (window.bwCaptureCampaign) window.bwCaptureCampaign(); }
     else {
       purge();
+      if (window.bwClearCampaign) window.bwClearCampaign();
       // Scripts already running on this page cannot be unloaded, so start the page fresh without them.
       if (loaded) location.reload();
     }
@@ -108,7 +109,7 @@
     addStyles();
     var c=getChoice();
     if (c==='accepted' && !GPC) loadTrackers();
-    else if (c || GPC) purge();
+    else if (c || GPC) { purge(); try{ sessionStorage.removeItem('bw_campaign'); }catch(e){} }
     else show(false);
     document.addEventListener('click',function(e){
       var t=e.target.closest('[data-cookie-settings]'); if(!t) return;
