@@ -225,7 +225,7 @@
     try{
       var p=new URLSearchParams({from:src});
       var t=document.getElementById('pt'); if(t&&t.value) p.set('type',t.value.slice(0,40));
-      var cp=document.getElementById('utm-campaign'); if(cp&&cp.value) p.set('campaign',cp.value.slice(0,80));
+      var cp=document.getElementById('utm-campaign'); if(cp&&cp.value&&!/@/.test(cp.value)) p.set('campaign',cp.value.replace(/[^\w\-. ]/g,'').slice(0,80));
       f.setAttribute('action','/thank-you?'+p.toString());
     }catch(e){}
   });
