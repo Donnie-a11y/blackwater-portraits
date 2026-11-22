@@ -221,6 +221,7 @@
   document.getElementById('lead-source').value=src;
   f.setAttribute('action','/thank-you?from='+encodeURIComponent(src));
   f.addEventListener('submit',function(){
+    try{ sessionStorage.setItem('bw_lead_pending',String(Date.now())); }catch(e){}
     try{
       var p=new URLSearchParams({from:src});
       var t=document.getElementById('pt'); if(t&&t.value) p.set('type',t.value.slice(0,40));

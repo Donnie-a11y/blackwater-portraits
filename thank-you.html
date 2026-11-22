@@ -16,9 +16,10 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
 <meta name="theme-color" content="#281F18">
 <!-- Google Analytics (GA4) -->
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-15W37TRF25');(function(){var q=new URLSearchParams(location.search);gtag('event','generate_lead',{lead_source:(q.get('from')||'unknown'),portrait_type:(q.get('type')||'unspecified'),lead_campaign:(q.get('campaign')||'none')});})();</script>
+<script>/* Fire lead events once per real inquiry: contact.html sets bw_lead_pending on submit; refreshes and direct visits do not count. */window.__bwLead=(function(){try{var v=sessionStorage.getItem('bw_lead_pending');if(!v)return false;sessionStorage.removeItem('bw_lead_pending');return (Date.now()-Number(v))<1800000;}catch(e){return true;}})();</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-15W37TRF25');(function(){if(!window.__bwLead)return;var q=new URLSearchParams(location.search);gtag('event','generate_lead',{lead_source:(q.get('from')||'unknown'),portrait_type:(q.get('type')||'unspecified'),lead_campaign:(q.get('campaign')||'none')});})();</script>
 <!-- Meta Pixel Code -->
-<script>!function(f){if(f.fbq)return;var n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window);fbq('init','999634139621338');fbq('track','PageView');fbq('track','Lead');</script>
+<script>!function(f){if(f.fbq)return;var n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window);fbq('init','999634139621338');fbq('track','PageView');if(window.__bwLead)fbq('track','Lead');</script>
 <!-- End Meta Pixel Code -->
 <script src="/consent.js" defer></script>
 </head>
