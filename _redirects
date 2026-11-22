@@ -3,6 +3,7 @@
 /models/                 /404.html   410!
 /models.html             /404.html   410!
 # Old senior page now lives at /seniors
+/about-1                /about      301!
 /senior-experience       /seniors    301!
 /senior-experience.html  /seniors    301!
 # Retired: Wonder of Christmas Santa (Oct 2026)
