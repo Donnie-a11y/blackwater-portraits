@@ -8,11 +8,15 @@ export default async (request, context) => {
   const ctx = context.deploy?.context || 'unknown';
   if (ctx === 'production') return new Response('Not found', { status: 404 });
   if (url.pathname === '/api/bw/stripe-webhook' && request.method === 'POST') return context.next();
-  const pass = Netlify.env.get('BW_PREVIEW_PASSWORD') || '';
+  // Netlify stores only the SHA-256 of the preview password (BW_PREVIEW_PASSWORD_SHA256).
+  const want = (Netlify.env.get('BW_PREVIEW_PASSWORD_SHA256') || '').toLowerCase();
   const h = request.headers.get('authorization') || '';
   let ok = false;
-  if (pass.length >= 12 && h.startsWith('Basic ')) {
-    try { const [, p] = atob(h.slice(6)).split(/:(.*)/s); ok = timingSafe(p || '', pass); } catch {}
+  if (/^[0-9a-f]{64}$/.test(want) && h.startsWith('Basic ')) {
+    try {
+      const [, p] = atob(h.slice(6)).split(/:(.*)/s);
+      if ((p || '').length >= 12) ok = timingSafe(await sha256hex(p), want);
+    } catch {}
   }
   if (!ok) return new Response('Private preview', { status: 401, headers: {
     'www-authenticate': 'Basic realm="Blackwater private preview", charset="UTF-8"', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' } });
@@ -30,3 +34,7 @@ function timingSafe(a, b) {
   return d === 0;
 }
 export const config = { path: ['/agreement', '/agreement/*', '/api/bw/*'] };
+async function sha256hex(t) {
+  const d = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t));
+  return [...new Uint8Array(d)].map(b => b.toString(16).padStart(2, '0')).join('');
+}

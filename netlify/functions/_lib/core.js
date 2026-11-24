@@ -362,6 +362,9 @@ export async function audit(store, who, action, detail) {
 export function requireAdmin(req, env) {
   const h = req.headers.get('authorization') || '';
   const tok = h.startsWith('Bearer ') ? h.slice(7) : '';
+  // Preferred: Netlify stores only the SHA-256 of the token, never the token itself.
+  const h = String(env.BW_ADMIN_TOKEN_SHA256 || '').toLowerCase();
+  if (/^[0-9a-f]{64}$/.test(h)) { if (tok.length < 32 || !safeEqual(sha256(tok), h)) fail(401, 'unauthorized'); return 'admin'; }
   if (!env.BW_ADMIN_TOKEN || env.BW_ADMIN_TOKEN.length < 32 || !safeEqual(tok, env.BW_ADMIN_TOKEN)) fail(401, 'unauthorized');
   return 'admin';
 }

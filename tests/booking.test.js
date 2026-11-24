@@ -335,3 +335,11 @@ test('review fix: crash before invite marked signed still blocks revoke; older o
   const ev = paidEvent('BW-2027-068', rec);                        // client pays the OLDER cs_test_1
   assert.deepEqual(await C.handleStripeEvent(s, ev, stripeSig(ev), ENV), { booked: 'BW-2027-068' });
 });
+
+test('admin accepts a SHA-256 of the token, so the host never stores the plaintext', () => {
+  const tok = 'b'.repeat(43); const req = (h) => ({ headers: new Map(Object.entries(h)) });
+  const env = { BW_ADMIN_TOKEN_SHA256: C.sha256(tok) };
+  assert.equal(C.requireAdmin(req({ authorization: 'Bearer ' + tok }), env), 'admin');
+  assert.throws(() => C.requireAdmin(req({ authorization: 'Bearer ' + C.sha256(tok) }), env), e => e.code === 'unauthorized');
+  assert.throws(() => C.requireAdmin(req({ authorization: 'Bearer ' + 'c'.repeat(43) }), env), e => e.code === 'unauthorized');
+});
