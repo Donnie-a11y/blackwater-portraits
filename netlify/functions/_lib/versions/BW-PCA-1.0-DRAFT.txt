@@ -1,0 +1,5 @@
+TEST FIXTURE ONLY. NOT THE AGREEMENT.
+Replace this file with the exact signing-page text of the owner- and counsel-approved
+Portrait Commission Agreement (the sandbox copy and its SHA-256 are on the Mac Mini in
+Documents/Claude/Projects/BW - Services/Legal-Booking-Nov2026). The server fingerprints
+this file at start-up; every signed record stores that fingerprint.
