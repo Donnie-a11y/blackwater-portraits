@@ -15,7 +15,9 @@ const json = (status, body) => new Response(JSON.stringify(body), { status, head
 export default async (req) => {
   const env = { ...process.env, BW_SITE_URL: process.env.BW_SITE_URL || process.env.DEPLOY_PRIME_URL || process.env.URL };
   if (env.BW_SIGNING_ENABLED !== 'yes') return json(404, { error: 'not_found' });   // off until owner + counsel approve
-  const store = getStore({ name: 'bw-commissions', consistency: 'strong' });
+  // Preview and production share one site-wide store namespace, so test records are kept in
+  // a separate store. Production must set BW_STORE_NAME=bw-commissions explicitly.
+  const store = getStore({ name: env.BW_STORE_NAME || 'bw-commissions-preview', consistency: 'strong' });
   const url = new URL(req.url);
   const route = url.pathname.replace(/^\/api\/bw\/?/, '');
   try {
