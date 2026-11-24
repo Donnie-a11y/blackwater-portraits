@@ -4,7 +4,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import * as C from './_lib/core.js';
 
-const VERSION_DIR = path.join(path.dirname(new URL(import.meta.url).pathname), '_lib', 'versions');
+const VERSION_DIR = [path.resolve('netlify/functions/_lib/versions'), path.join(path.dirname(new URL(import.meta.url).pathname), '_lib', 'versions')]
+  .find(d => { try { return fs.readdirSync(d).length > 0; } catch { return false; } });
 const versions = C.loadVersions(Object.fromEntries(
   fs.readdirSync(VERSION_DIR).filter(f => f.endsWith('.txt')).map(f => [f.slice(0, -4), fs.readFileSync(path.join(VERSION_DIR, f), 'utf8')])));
 
@@ -12,7 +13,7 @@ const json = (status, body) => new Response(JSON.stringify(body), { status, head
   'content-type': 'application/json', 'cache-control': 'no-store', 'x-robots-tag': 'noindex', 'referrer-policy': 'no-referrer' } });
 
 export default async (req) => {
-  const env = process.env;
+  const env = { ...process.env, BW_SITE_URL: process.env.BW_SITE_URL || process.env.DEPLOY_PRIME_URL || process.env.URL };
   if (env.BW_SIGNING_ENABLED !== 'yes') return json(404, { error: 'not_found' });   // off until owner + counsel approve
   const store = getStore({ name: 'bw-commissions', consistency: 'strong' });
   const url = new URL(req.url);
