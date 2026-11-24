@@ -360,8 +360,9 @@ export async function audit(store, who, action, detail) {
 }
 
 export function requireAdmin(req, env) {
+  // The preview guard uses the Authorization header (Basic), so the admin key travels in its own header.
   const h = req.headers.get('authorization') || '';
-  const tok = h.startsWith('Bearer ') ? h.slice(7) : '';
+  const tok = req.headers.get('x-bw-admin') || (h.startsWith('Bearer ') ? h.slice(7) : '');
   // Preferred: Netlify stores only the SHA-256 of the token, never the token itself.
   const want = String(env.BW_ADMIN_TOKEN_SHA256 || '').toLowerCase();
   if (/^[0-9a-f]{64}$/.test(want)) { if (tok.length < 32 || !safeEqual(sha256(tok), want)) fail(401, 'unauthorized'); return 'admin'; }
