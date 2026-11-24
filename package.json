@@ -1,0 +1,9 @@
+{
+  "name": "blackwater-portraits-booking",
+  "private": true,
+  "type": "module",
+  "description": "Server functions for the Blackwater commission agreement, signing and retainer booking (sandbox, not deployed).",
+  "dependencies": {
+    "@netlify/blobs": "^10.7.13"
+  }
+}

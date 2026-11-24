@@ -1,0 +1,5 @@
+# Booking-system sandbox. Secrets and the BW_SIGNING_ENABLED switch live in Netlify
+# environment variables scoped to the Deploy Previews context only.
+[functions]
+  node_bundler = "esbuild"
+  included_files = ["netlify/functions/_lib/versions/*.txt"]
