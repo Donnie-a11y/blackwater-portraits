@@ -25,7 +25,8 @@ export default async (req) => {
       return json(200, C.publicView(await C.loadInvite(store, url.searchParams.get('t')), versions));
     }
     if (route === 'sign' && req.method === 'POST') {
-      const b = await req.json();
+      const b = await req.json().catch(() => null);
+      if (!b || typeof b !== 'object') return json(400, { error: 'bad_request' });
       if (b.website) return json(400, { error: 'rejected' });                          // honeypot
       const { record, duplicate } = await C.sign(store, b.t, b, {
         userAgent: req.headers.get('user-agent'), timeZone: b.timeZone, ip: req.headers.get('x-nf-client-connection-ip') }, versions);
@@ -48,8 +49,9 @@ export default async (req) => {
         await C.audit(store, who, 'create_invite', { commissionId: invite.commissionId, inviteId: invite.inviteId });
         return json(200, { link: `${env.BW_SITE_URL}/agreement/?t=${token}`, invite });
       }
-      if (a === 'revoke' && req.method === 'POST') return json(200, await C.revokeInvite(store, (await req.json()).t));
+      if (a === 'revoke' && req.method === 'POST') { const r = await C.revokeInvite(store, (await req.json()).t); await C.audit(store, who, 'revoke', { inviteId: r.inviteId }); return json(200, r); }
       if (a === 'search') { await C.audit(store, who, 'search', { q: url.searchParams.get('q') }); return json(200, await C.search(store, url.searchParams.get('q'))); }
+      if (a === 'verify') await C.audit(store, who, 'verify', { c: url.searchParams.get('c') });
       if (a === 'verify') return json(200, await C.verifyChain(store, url.searchParams.get('c')));
       if (a === 'export') { await C.audit(store, who, 'export', {}); return json(200, await C.exportAll(store)); }
     }

@@ -157,6 +157,7 @@ test('webhook: only a valid signed, paid, correct-amount event books; duplicates
   const s = new MemStore();
   const { token } = await invite(s, { commissionId: 'BW-2027-041', role: 'primary', signerName: 'Avery Testerly', signerEmail: 'a@example.test' });
   const { record } = await C.sign(s, token, base('Avery Testerly', { imageUse: 'standard', subjects: family('Avery Testerly') }), meta, versions);
+  await C.startCheckout(s, token, ENV, fakeStripe());
   const now = Math.floor(Date.now() / 1000);
   // forged / wrong secret / stale timestamp
   const ev = paidEvent('BW-2027-041', record);
@@ -190,8 +191,12 @@ test('webhook rejects a paid event whose record does not match', async () => {
   const s = new MemStore();
   const { token } = await invite(s, { commissionId: 'BW-2027-042', role: 'primary', signerName: 'Avery Testerly', signerEmail: 'a@example.test' });
   const { record } = await C.sign(s, token, base('Avery Testerly', { imageUse: 'standard', subjects: family('Avery Testerly') }), meta, versions);
+  await C.startCheckout(s, token, ENV, fakeStripe());
   const ev = paidEvent('BW-2027-042', { body: { ...record.body, recordId: 'rec_forged' } });
   assert.equal((await C.handleStripeEvent(s, ev, stripeSig(ev), ENV)).ignored, 'record_mismatch');
+  const ev2 = paidEvent('BW-2027-042', record).replace('"id":"cs_test_1"', '"id":"cs_test_other"');
+  assert.equal((await C.handleStripeEvent(s, ev2, stripeSig(ev2), ENV)).ignored, 'session_mismatch');
+  assert.equal((await C.bookingStatus(s, token)).booking, 'AWAITING_VERIFIED_PAYMENT');
 });
 
 test('search by commission, signer, subject, email and year; export verifies every chain', async () => {
@@ -217,4 +222,116 @@ test('admin endpoints refuse missing, short or wrong tokens', () => {
     assert.throws(() => C.requireAdmin(req(h), env), e => e.code === 'unauthorized');
   assert.throws(() => C.requireAdmin(req({ authorization: 'Bearer short' }), { BW_ADMIN_TOKEN: 'short' }), e => e.code === 'unauthorized');
   assert.equal(C.requireAdmin(req({ authorization: 'Bearer ' + 'a'.repeat(40) }), env), 'admin');
+});
+
+test('review fix: one primary per commission; release links only after a signed Standard primary', async () => {
+  const s = new MemStore();
+  const p = await invite(s, { commissionId: 'BW-2027-060', role: 'primary', signerName: 'Avery Testerly', signerEmail: 'a@example.test' });
+  await assert.rejects(invite(s, { commissionId: 'BW-2027-060', role: 'primary', signerName: 'Jordan Testerly', signerEmail: 'j@example.test' }), e => e.code === 'primary_exists');
+  await assert.rejects(invite(s, { commissionId: 'BW-2027-060', role: 'release', signerName: 'Jordan Testerly', signerEmail: 'j@example.test' }), e => e.code === 'primary_not_signed');
+  // a release link created after Standard is refused at signing if the commission somehow turned private
+  await C.sign(s, p.token, base('Avery Testerly', { imageUse: 'standard', subjects: family('Avery Testerly') }), meta, versions);
+  await assert.rejects(C.revokeInvite(s, p.token), e => e.code === 'already_signed');
+  const r = await invite(s, { commissionId: 'BW-2027-060', role: 'release', signerName: 'Jordan Testerly', signerEmail: 'j@example.test' });
+  assert.ok(r.token);
+  // revoking an unsigned primary frees the slot for a corrected link
+  const q = await invite(s, { commissionId: 'BW-2027-061', role: 'primary', signerName: 'Avery Testerly', signerEmail: 'wrong@example.test' });
+  await C.revokeInvite(s, q.token);
+  assert.ok((await invite(s, { commissionId: 'BW-2027-061', role: 'primary', signerName: 'Avery Testerly', signerEmail: 'a@example.test' })).token);
+});
+
+test('review fix: crash between record and chain head is reconciled on retry; chain stays valid', async () => {
+  const s = new MemStore();
+  const { token } = await invite(s, { commissionId: 'BW-2027-062', role: 'primary', signerName: 'Avery Testerly', signerEmail: 'a@example.test' });
+  const sub = base('Avery Testerly', { imageUse: 'standard', subjects: family('Avery Testerly') });
+  const realSet = s.setJSON.bind(s); let crash = true;
+  s.setJSON = async (k, d, o) => { if (crash && k.startsWith('chain/')) { crash = false; throw new Error('function timeout'); } return realSet(k, d, o); };
+  await assert.rejects(C.sign(s, token, sub, meta, versions), /timeout/);
+  let v = await C.verifyChain(s, 'BW-2027-062');
+  assert.equal(v.ok, true); assert.equal(v.records, 0); assert.equal(v.uncommitted.length, 1);   // orphan is never counted as signed
+  const { record, duplicate } = await C.sign(s, token, sub, meta, versions);
+  assert.equal(duplicate, true);
+  v = await C.verifyChain(s, 'BW-2027-062');
+  assert.deepEqual([v.ok, v.records, v.uncommitted.length], [true, 1, 0]);
+  assert.equal((await C.loadInvite(s, token)).status, 'signed');
+  assert.equal(record.body.seq, 1);
+});
+
+test('review fix: orphan that no longer fits the head is discarded and re-signed', async () => {
+  const s = new MemStore();
+  const p = await invite(s, { commissionId: 'BW-2027-063', role: 'primary', signerName: 'Avery Testerly', signerEmail: 'a@example.test' });
+  await C.sign(s, p.token, base('Avery Testerly', { imageUse: 'standard', subjects: family('Avery Testerly') }), meta, versions);
+  const a = await invite(s, { commissionId: 'BW-2027-063', role: 'release', signerName: 'Jordan Testerly', signerEmail: 'j@example.test' });
+  const b = await invite(s, { commissionId: 'BW-2027-063', role: 'release', signerName: 'Casey Testerly', signerEmail: 'c@example.test' });
+  const realSet = s.setJSON.bind(s); let crash = true;
+  s.setJSON = async (k, d, o) => { if (crash && k.startsWith('chain/')) { crash = false; throw new Error('timeout'); } return realSet(k, d, o); };
+  await assert.rejects(C.sign(s, a.token, base('Jordan Testerly', { subjects: [{ subject: 'Jordan Testerly', type: 'adult', release: 'yes' }] }), meta, versions));
+  await C.sign(s, b.token, base('Casey Testerly', { subjects: [{ subject: 'Casey Testerly', type: 'adult', release: 'yes' }] }), meta, versions);
+  const { record } = await C.sign(s, a.token, base('Jordan Testerly', { subjects: [{ subject: 'Jordan Testerly', type: 'adult', release: 'yes' }] }), meta, versions);
+  assert.equal(record.body.seq, 3);
+  const v = await C.verifyChain(s, 'BW-2027-063');
+  assert.deepEqual([v.ok, v.records, v.uncommitted.length], [true, 3, 0]);
+});
+
+test('review fix: bad input is a 4xx, not a crash', async () => {
+  const s = new MemStore();
+  const { token } = await invite(s, { commissionId: 'BW-2027-064', role: 'primary', signerName: 'Avery Testerly', signerEmail: 'a@example.test' });
+  await assert.rejects(C.sign(s, token, base('Avery Testerly', { imageUse: 'standard', subjects: [null, 7, 'x'] }), meta, versions), e => e.status === 422);
+  await assert.rejects(C.sign(s, token, null, meta, versions), e => e.status === 400);
+});
+
+test('review fix: retried checkout sends identical Stripe request under the same idempotency key', async () => {
+  const s = new MemStore(); const f = fakeStripe();
+  const { token } = await invite(s, { commissionId: 'BW-2027-065', role: 'primary', signerName: 'Avery Testerly', signerEmail: 'a@example.test' });
+  await C.sign(s, token, base('Avery Testerly', { imageUse: 'standard', subjects: family('Avery Testerly') }), meta, versions);
+  const t0 = 1_800_000_000_000;
+  await C.startCheckout(s, token, ENV, f, t0); await s.delete('checkout/BW-2027-065');
+  await C.startCheckout(s, token, ENV, f, t0 + 7000);
+  assert.equal(f.calls[0].headers['Idempotency-Key'], f.calls[1].headers['Idempotency-Key']);
+  assert.equal(f.calls[0].body, f.calls[1].body);
+  const exp = Number(new URLSearchParams(f.calls[0].body).get('expires_at')) - t0 / 1000;
+  assert.ok(exp >= 1800 && exp <= 3600);
+});
+
+test('review fix: double tap where B links A\'s record mid-flight keeps one valid record', async () => {
+  const s = new MemStore();
+  const { token } = await invite(s, { commissionId: 'BW-2027-066', role: 'primary', signerName: 'Avery Testerly', signerEmail: 'a@example.test' });
+  const sub = base('Avery Testerly', { imageUse: 'standard', subjects: family('Avery Testerly') });
+  const realSet = s.setJSON.bind(s); let release, gate = new Promise(r => (release = r)), paused = false;
+  s.setJSON = async (k, d, o) => { if (!paused && k.startsWith('chain/')) { paused = true; await gate; } return realSet(k, d, o); };
+  const A = C.sign(s, token, sub, meta, versions);
+  await new Promise(r => setTimeout(r, 5));          // A has written its record and is paused before the head
+  const B = await C.sign(s, token, sub, meta, versions);
+  release(); const a = await A;
+  assert.equal(a.record.hash, B.record.hash);
+  const v = await C.verifyChain(s, 'BW-2027-066');
+  assert.deepEqual([v.ok, v.records, v.uncommitted.length], [true, 1, 0]);
+});
+
+test('review fix: two retries racing on one orphan both return the committed record', async () => {
+  const s = new MemStore();
+  const { token } = await invite(s, { commissionId: 'BW-2027-067', role: 'primary', signerName: 'Avery Testerly', signerEmail: 'a@example.test' });
+  const sub = base('Avery Testerly', { imageUse: 'standard', subjects: family('Avery Testerly') });
+  const realSet = s.setJSON.bind(s); let crash = true;
+  s.setJSON = async (k, d, o) => { if (crash && k.startsWith('chain/')) { crash = false; throw new Error('timeout'); } return realSet(k, d, o); };
+  await assert.rejects(C.sign(s, token, sub, meta, versions));
+  const [x, y, z] = await Promise.all([1, 2, 3].map(() => C.sign(s, token, sub, meta, versions)));
+  assert.equal(new Set([x, y, z].map(r => r.record.hash)).size, 1);
+  const v = await C.verifyChain(s, 'BW-2027-067');
+  assert.deepEqual([v.ok, v.records, v.uncommitted.length], [true, 1, 0]);
+});
+
+test('review fix: crash before invite marked signed still blocks revoke; older open session still books', async () => {
+  const s = new MemStore();
+  const { token } = await invite(s, { commissionId: 'BW-2027-068', role: 'primary', signerName: 'Avery Testerly', signerEmail: 'a@example.test' });
+  const realSet = s.setJSON.bind(s); let crash = true;
+  s.setJSON = async (k, d, o) => { if (crash && k.startsWith('invites/')) { crash = false; throw new Error('timeout'); } return realSet(k, d, o); };
+  await assert.rejects(C.sign(s, token, base('Avery Testerly', { imageUse: 'standard', subjects: family('Avery Testerly') }), meta, versions));
+  await assert.rejects(C.revokeInvite(s, token), e => e.code === 'already_signed');
+  const rec = (await C.sign(s, token, base('Avery Testerly', { imageUse: 'standard', subjects: family('Avery Testerly') }), meta, versions)).record;
+  const f = fakeStripe();
+  await C.startCheckout(s, token, ENV, f); await s.delete('checkout/BW-2027-068');
+  await C.startCheckout(s, token, ENV, f, Date.now() + 1900e3);   // newer session cs_test_2
+  const ev = paidEvent('BW-2027-068', rec);                        // client pays the OLDER cs_test_1
+  assert.deepEqual(await C.handleStripeEvent(s, ev, stripeSig(ev), ENV), { booked: 'BW-2027-068' });
 });

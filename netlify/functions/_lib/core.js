@@ -51,10 +51,7 @@ export async function createInvite(store, { commissionId, role, signerName, sign
   if (!validName(signerName)) fail(400, 'bad_name');
   if (!emailOk(signerEmail)) fail(400, 'bad_email');
   if (!versions[agreementVersion]) fail(400, 'unknown_version');
-  if (role === 'release') {
-    const priv = await commissionIsPrivate(store, commissionId);
-    if (priv) fail(409, 'private_commission', 'Never send a release link for a Private Commission.');
-  }
+  if (role === 'release') await requireStandardPrimary(store, commissionId);
   const token = newToken();
   const invite = {
     inviteId: newId('inv'), commissionId, role,
@@ -62,6 +59,10 @@ export async function createInvite(store, { commissionId, role, signerName, sign
     agreementVersion, createdAt: new Date(now).toISOString(),
     expiresAt: new Date(now + INVITE_TTL_DAYS * 864e5).toISOString(), status: 'open',
   };
+  if (role === 'primary') {
+    const w = await store.setJSON('primary/' + commissionId, { inviteId: invite.inviteId, tokenHash: sha256(token) }, { onlyIfNew: true });
+    if (w && w.modified === false) fail(409, 'primary_exists', 'This commission already has a primary agreement link. Revoke it first.');
+  }
   await store.setJSON('invites/' + sha256(token), invite, { onlyIfNew: true });
   return { token, invite };
 }
@@ -70,8 +71,11 @@ export async function revokeInvite(store, token) {
   const key = 'invites/' + sha256(token);
   const inv = await store.get(key, { type: 'json' });
   if (!inv) fail(404, 'not_found');
+  if (inv.status === 'signed' || await store.get(`records/${inv.commissionId}/${inv.inviteId}`, { type: 'json' }))
+    fail(409, 'already_signed', 'Signed records are never revoked or deleted.');
   inv.status = 'revoked';
   await store.setJSON(key, inv);
+  if (inv.role === 'primary') await store.delete('primary/' + inv.commissionId);
   return inv;
 }
 
@@ -84,13 +88,13 @@ export async function loadInvite(store, token, now = Date.now()) {
   return inv;
 }
 
-async function commissionIsPrivate(store, commissionId) {
-  const { blobs } = await store.list({ prefix: 'records/' + commissionId + '/' });
-  for (const b of blobs) {
-    const r = await store.get(b.key, { type: 'json' });
-    if (r && r.body.role === 'primary' && r.body.imageUse === 'private') return true;
-  }
-  return false;
+// Release links exist only for a commission whose primary agreement is signed with the Standard Release.
+async function requireStandardPrimary(store, commissionId) {
+  const p = await store.get('primary/' + commissionId, { type: 'json' });
+  const rec = p && await store.get(`records/${commissionId}/${p.inviteId}`, { type: 'json' });
+  if (!rec) fail(409, 'primary_not_signed', 'The client must sign the agreement before any release link is sent.');
+  if (rec.body.imageUse === 'private') fail(409, 'private_commission', 'Never send a release link for a Private Commission.');
+  return rec;
 }
 
 // What the signing page is allowed to see.
@@ -106,6 +110,7 @@ export function publicView(inv, versions) {
 
 // ---------- signing ----------
 export function validateSubmission(inv, sub, versions) {
+  if (!sub || typeof sub !== 'object') fail(400, 'bad_request');
   const errs = [];
   const v = versions[inv.agreementVersion];
   if (sub.agreementVersion !== inv.agreementVersion || sub.agreementSha256 !== v.sha256) errs.push('agreement_changed');
@@ -121,7 +126,7 @@ export function validateSubmission(inv, sub, versions) {
     if (!['standard', 'private'].includes(sub.imageUse)) errs.push('image_use_choice_required');
     imageUse = sub.imageUse;
   }
-  const subjects = Array.isArray(sub.subjects) ? sub.subjects.slice(0, 40) : [];
+  const subjects = (Array.isArray(sub.subjects) ? sub.subjects.slice(0, 40) : []).map(x => (x && typeof x === 'object') ? x : {});
   if (isPrimary && subjects.length === 0) errs.push('subjects_required');
   const signer = normName(inv.signerName);
   const out = subjects.map((s, i) => {
@@ -151,10 +156,9 @@ export function validateSubmission(inv, sub, versions) {
 export async function sign(store, token, sub, meta, versions, now = Date.now()) {
   const inv = await loadInvite(store, token, now);
   const recKey = `records/${inv.commissionId}/${inv.inviteId}`;
-  const existing = await store.get(recKey, { type: 'json' });
-  if (existing) return { record: existing, duplicate: true };           // double tap / retry: one record
-  if (inv.status !== 'open') fail(409, 'already_signed');
-  if (inv.role === 'release' && await commissionIsPrivate(store, inv.commissionId)) fail(409, 'private_commission');
+  const first = await store.get(recKey, { type: 'json' });
+  if (!first && inv.status !== 'open') fail(409, 'already_signed');
+  if (inv.role === 'release') await requireStandardPrimary(store, inv.commissionId);
 
   const v = validateSubmission(inv, sub, versions);
   const body = {
@@ -166,40 +170,67 @@ export async function sign(store, token, sub, meta, versions, now = Date.now()) 
     signedAt: new Date(now).toISOString(), clientTimeZone: clean(meta.timeZone, 64),
     userAgent: clean(meta.userAgent, 300), ipHash: meta.ip ? sha256('bw-ip:' + meta.ip) : '',
   };
-  // Append to the per-commission hash chain (optimistic concurrency on the head).
-  for (let attempt = 0; attempt < 5; attempt++) {
+  // Append to the per-commission hash chain. Every pass re-reads state, so concurrent
+  // double taps, retries after a crash and other signers converge on one committed record.
+  // A record is deleted only when it can no longer be committed (its predecessor is no
+  // longer the head and nothing points to it), so a committed record is never deleted.
+  const markSigned = (r) => store.setJSON('invites/' + sha256(token), { ...inv, status: 'signed', signedAt: r.body.signedAt, recordId: r.body.recordId });
+  for (let attempt = 0; attempt < 8; attempt++) {
     const head = await store.getWithMetadata('chain/' + inv.commissionId, { type: 'json' });
-    const prevHash = head?.data?.hash || 'GENESIS';
-    const seq = (head?.data?.seq || 0) + 1;
-    const recordHash = sha256(prevHash + '\n' + canonical({ ...body, seq }));
-    const record = { body: { ...body, seq }, prevHash, hash: recordHash };
-    const w = await store.setJSON(recKey, record, { onlyIfNew: true });
-    if (w && w.modified === false) return { record: await store.get(recKey, { type: 'json' }), duplicate: true };
+    const headHash = head?.data?.hash || 'GENESIS', headSeq = head?.data?.seq || 0;
     const cas = head ? { onlyIfMatch: head.etag } : { onlyIfNew: true };
-    const hw = await store.setJSON('chain/' + inv.commissionId, { hash: recordHash, seq, recordKey: recKey }, cas);
-    if (hw && hw.modified === false) { await store.delete(recKey); continue; }   // lost the race: retry on new head
-    await store.setJSON('invites/' + sha256(token), { ...inv, status: 'signed', signedAt: body.signedAt, recordId: body.recordId });
-    return { record, duplicate: false };
+    let rec = await store.get(recKey, { type: 'json' });
+    if (rec && await isCommitted(store, inv.commissionId, rec)) { await markSigned(rec); return { record: rec, duplicate: true }; }
+    if (rec && !(rec.prevHash === headHash && rec.body.seq === headSeq + 1)) {             // looks stale
+      if (await isCommitted(store, inv.commissionId, rec)) continue;                       // fresh check: committed meanwhile
+      await store.delete(recKey); rec = null;
+    }
+    let created = false;
+    if (!rec) {
+      const seq = headSeq + 1;
+      const candidate = { body: { ...body, seq }, prevHash: headHash, hash: sha256(headHash + '\n' + canonical({ ...body, seq })) };
+      const w = await store.setJSON(recKey, candidate, { onlyIfNew: true });
+      if (w && w.modified === false) continue;                          // a parallel request wrote it: re-evaluate
+      rec = candidate; created = true;
+    }
+    const hw = await store.setJSON('chain/' + inv.commissionId, { hash: rec.hash, seq: rec.body.seq, recordKey: recKey }, cas);
+    if (hw && hw.modified === false) continue;                          // head moved: re-evaluate, never blind-delete
+    await markSigned(rec);
+    return { record: rec, duplicate: !created || !!first };
   }
   fail(503, 'busy_retry');
+}
+
+async function isCommitted(store, commissionId, rec) {
+  const head = await store.get('chain/' + commissionId, { type: 'json' });
+  if (head && head.hash === rec.hash) return true;
+  const { blobs } = await store.list({ prefix: `records/${commissionId}/` });
+  for (const b of blobs) { const r = await store.get(b.key, { type: 'json' }); if (r && r.prevHash === rec.hash) return true; }
+  return false;
 }
 
 // Recompute every hash for a commission. Any edit, deletion or reorder breaks it.
 export async function verifyChain(store, commissionId) {
   const { blobs } = await store.list({ prefix: `records/${commissionId}/` });
-  const recs = [];
-  for (const b of blobs) recs.push(await store.get(b.key, { type: 'json' }));
-  recs.sort((a, b) => a.body.seq - b.body.seq);
-  let prev = 'GENESIS', problems = [];
-  recs.forEach((r, i) => {
-    if (r.body.seq !== i + 1) problems.push(`gap_or_reorder_at_${i + 1}`);
-    if (r.prevHash !== prev) problems.push(`prev_mismatch_seq_${r.body.seq}`);
-    if (sha256(r.prevHash + '\n' + canonical(r.body)) !== r.hash) problems.push(`tampered_seq_${r.body.seq}`);
-    prev = r.hash;
-  });
+  const byHash = new Map(), all = [];
+  for (const b of blobs) { const r = await store.get(b.key, { type: 'json' }); all.push(r); byHash.set(r.hash, r); }
   const head = await store.get('chain/' + commissionId, { type: 'json' });
-  if (recs.length && (!head || head.hash !== prev || head.seq !== recs.length)) problems.push('head_mismatch_or_record_missing');
-  return { commissionId, records: recs.length, ok: problems.length === 0, problems };
+  const problems = [], chain = [];
+  let h = head?.hash || 'GENESIS', expectSeq = head?.seq || 0;
+  while (h !== 'GENESIS') {
+    const r = byHash.get(h);
+    if (!r) { problems.push(`record_missing_at_seq_${expectSeq}`); break; }
+    if (sha256(r.prevHash + '\n' + canonical(r.body)) !== r.hash) problems.push(`tampered_seq_${r.body.seq}`);
+    if (r.body.seq !== expectSeq) problems.push(`seq_mismatch_${r.body.seq}`);
+    chain.push(r); h = r.prevHash; expectSeq--;
+    if (chain.length > all.length) { problems.push('cycle'); break; }
+  }
+  if (h === 'GENESIS' && expectSeq !== 0) problems.push('chain_short');
+  const inChain = new Set(chain.map(r => r.hash));
+  const orphans = all.filter(r => !inChain.has(r.hash));
+  for (const o of orphans) if (sha256(o.prevHash + '\n' + canonical(o.body)) !== o.hash) problems.push(`tampered_orphan_${o.body.recordId}`);
+  return { commissionId, records: chain.length, ok: problems.length === 0, problems,
+    uncommitted: orphans.map(o => o.body.recordId) };   // signer saw an error; never counted as signed
 }
 
 // ---------- retainer checkout ----------
@@ -227,17 +258,19 @@ export async function startCheckout(store, token, env, fetchImpl, now = Date.now
     'payment_intent_data[metadata][commission_id]': inv.commissionId,
     success_url: `${site}/agreement/?t=${token}&paid=pending`,
     cancel_url: `${site}/agreement/?t=${token}&paid=cancelled`,
-    expires_at: String(Math.floor(now / 1000) + 1800),
+    expires_at: String((Math.floor(now / 1800e3) + 2) * 1800),        // fixed per 30-minute window, 30-60 min ahead
   });
   const r = await fetchImpl('https://api.stripe.com/v1/checkout/sessions', {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + key, 'Content-Type': 'application/x-www-form-urlencoded',
-      'Idempotency-Key': `bw-retainer-${inv.commissionId}-${Math.floor(now / 1800e3)}` },
+      'Idempotency-Key': `bw-retainer-${inv.inviteId}-${Math.floor(now / 1800e3)}` },
     body: form.toString(),
   });
   const s = await r.json();
   if (!r.ok) fail(502, 'stripe_error', s?.error?.message);
-  await store.setJSON('checkout/' + inv.commissionId, { sessionId: s.id, url: s.url, expiresAt: new Date(s.expires_at * 1000).toISOString() });
+  const co = { sessionId: s.id, url: s.url, expiresAt: new Date(s.expires_at * 1000).toISOString(), inviteId: inv.inviteId };
+  await store.setJSON(`checkout-sessions/${inv.commissionId}/${s.id}`, co);   // every session stays payable and matchable
+  await store.setJSON('checkout/' + inv.commissionId, co);                     // latest, for reuse
   return { url: s.url, reused: false };
 }
 
@@ -271,7 +304,9 @@ async function applyStripeEvent(store, evt, env) {
   if (s.payment_status !== 'paid') return { ignored: 'not_paid_yet' };
   if (s.amount_total !== RETAINER_CENTS || s.currency !== RETAINER_CURRENCY) return { ignored: 'amount_mismatch', alert: true };
   const rec = await store.get(`records/${cid}/${s.metadata.invite_id}`, { type: 'json' });
-  if (!rec || rec.body.recordId !== s.metadata.record_id) return { ignored: 'record_mismatch', alert: true };
+  if (!rec || rec.body.recordId !== s.metadata.record_id || rec.body.role !== 'primary') return { ignored: 'record_mismatch', alert: true };
+  const co = await store.get(`checkout-sessions/${cid}/${s.id}`, { type: 'json' });
+  if (!co || co.inviteId !== rec.body.inviteId) return { ignored: 'session_mismatch', alert: true };
   const booking = {
     commissionId: cid, status: 'RETAINER_PAID_VERIFIED', recordId: rec.body.recordId,
     stripeSessionId: s.id, paymentIntent: s.payment_intent, amountCents: s.amount_total, currency: s.currency,
