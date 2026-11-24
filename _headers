@@ -1,14 +1,15 @@
+# Photos revalidate on every visit (cheap 304 when unchanged) so a replaced portfolio photo shows up right after deploy.
 /*.jpg
-  Cache-Control: public, max-age=2592000
+  Cache-Control: public, max-age=0, must-revalidate
 
 /*.jpeg
-  Cache-Control: public, max-age=2592000
+  Cache-Control: public, max-age=0, must-revalidate
 
 /*.png
   Cache-Control: public, max-age=2592000
 
 /.netlify/images
-  Cache-Control: public, max-age=2592000
+  Cache-Control: public, max-age=0, must-revalidate
 
 /*
   X-Content-Type-Options: nosniff

@@ -231,6 +231,53 @@
   });
 })();
 </script>
+<script>
+/* Inquiry sending (Nov 2026).
+   Netlify answers a form post with the thank-you page itself, so refreshing that page used to send the inquiry again.
+   Now the inquiry is sent in the background to the same address the form posts to and the thank-you page opens as a normal page that is safe to refresh.
+   One tap sends once. If the result is unknown (network drop, timeout, server error) nothing is re-sent automatically:
+   the visitor sees an honest message and can call, text, or choose to send again. */
+(function(){
+  var f=document.querySelector('form[name="inquiry"]');
+  if(!f||!window.fetch||!window.FormData||!window.URLSearchParams) return; // older browsers keep the plain form post
+  var btn=f.querySelector('button[type="submit"]'), label=btn?btn.textContent:'', sending=false, attempt=0;
+  var msg=document.createElement('p');
+  msg.className='form-note form-status'; msg.setAttribute('role','status'); msg.setAttribute('aria-live','polite');
+  msg.style.fontStyle='normal';
+  if(btn&&btn.parentNode) btn.parentNode.insertBefore(msg,btn.nextSibling); else f.appendChild(msg);
+  function busy(on){
+    if(!btn) return;
+    if(on){btn.setAttribute('aria-disabled','true');btn.setAttribute('aria-busy','true');btn.textContent='Sending...';}
+    else{btn.removeAttribute('aria-disabled');btn.removeAttribute('aria-busy');btn.textContent=label;}
+  }
+  function plain(){ msg.setAttribute('role','status'); msg.style.cssText='font-style:normal'; }
+  function unsure(){
+    if(!sending) return;
+    try{ sessionStorage.removeItem('bw_lead_pending'); }catch(e){}
+    sending=false; busy(false);
+    msg.setAttribute('role','alert');
+    msg.style.cssText='font-style:normal;color:#281F18;font-size:14px;line-height:1.6;border-left:3px solid #C2A76A;background:#F4EEE2;padding:12px 16px';
+    msg.innerHTML='We could not confirm that your inquiry was sent. Please call or text <a href="tel:+17403914921">(740) 391-4921</a>, or press Send Inquiry to try again.';
+  }
+  window.addEventListener('pageshow',function(e){ if(e.persisted){ sending=false; busy(false); plain(); msg.textContent=''; } });
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(sending) return;
+    var body;
+    try{ body=new URLSearchParams(new FormData(f)).toString(); }
+    catch(err){ HTMLFormElement.prototype.submit.call(f); return; } // nothing was sent yet, so the plain post is safe
+    sending=true; busy(true); plain(); msg.textContent='Sending your inquiry.';
+    var my=++attempt; function mine(){ return my===attempt; }
+    var dest=f.getAttribute('action')||'/thank-you';
+    var ctl=window.AbortController?new AbortController():null;
+    var slow=setTimeout(function(){ if(mine()&&sending) msg.textContent='Still sending. Please keep this page open.'; },12000);
+    var stop=setTimeout(function(){ if(!mine()) return; if(ctl) ctl.abort(); unsure(); },45000);
+    fetch(dest,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body,signal:ctl?ctl.signal:undefined})
+      .then(function(r){ clearTimeout(slow); clearTimeout(stop); if(!mine()) return; if(r.ok){ location.replace(dest); } else { unsure(); } })
+      .catch(function(){ clearTimeout(slow); clearTimeout(stop); if(mine()) unsure(); });
+  });
+})();
+</script>
 <script src="site.js"></script>
 </body>
 </html>

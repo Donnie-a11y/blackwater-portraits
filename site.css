@@ -612,3 +612,20 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 .mobile-menu a.mm-phone{display:block;font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;text-align:center;color:rgba(251,248,241,.85);border:0;padding:14px 0;margin:6px 0 0;line-height:1.4;min-height:44px;text-decoration:none}
 .mobile-menu a.mm-phone:hover,.mobile-menu a.mm-phone:focus{color:var(--gold)}
+
+/* Service page hero with a portfolio portrait (family, children, seniors; Nov 2026) */
+.chero.cs{padding:150px 0 80px;text-align:left}
+.chero.cs .cs-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
+.chero.cs .cs-txt{text-align:center}
+.chero.cs .cs-ph{margin:0;max-height:640px;overflow:hidden;box-shadow:0 24px 60px rgba(20,14,10,.45)}
+.chero.cs .cs-ph img{display:block;width:100%;height:100%;max-height:640px;object-fit:cover}
+.chero.cs .cs-cta{margin-top:34px}
+@media(max-width:880px){
+.chero.cs{padding:80px 0 52px}
+.chero.cs .wrap{padding-left:0;padding-right:0}
+.chero.cs .cs-grid{grid-template-columns:1fr;gap:28px}
+.chero.cs .cs-ph{order:-1;box-shadow:none;max-height:none;width:100%;height:min(100vw,60vh)}
+.chero.cs .cs-ph img{max-height:none}
+.chero.cs .cs-txt{padding:0 24px}
+.chero.cs .cs-cta{margin-top:26px}
+}
